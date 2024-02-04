@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Outlook Automation</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<a href="./" class="logo">Osa Musa</a>
+					</header>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li><a href="./">Home</a></li>
+							<li><a href="./about">About</a></li>
+						</ul>
+						<ul class="icons">
+							<li><a href="https://www.linkedin.com/in/osamusa/" target="blank" class="icon brands alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
+							<li><a href="https://github.com/OsaMusa/" target="blank" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<section class="post">
+								<header class="major">
+									<h1>Outlook Automation</h1>
+									<p style="text-align: center; font-size: x-large;"><b>Project for: </b>Altus Group</p>
+								</header>
+								<p>
+									<h3>Problem</h3>
+									The company had its scheduled hearings stored on both a legacy database and Snowflake. In order to know which consultant
+									should attend each hearing, as well as where and when, they would export the data from the database and have an assistant
+									from the operations team manually enter the information into each consultant's Outlook calendar. This process cost these
+									employees several hours each day, and was prone to input errors. operations needed a way to reduce the workload for the
+									assistants while also reducing the errors that could risk hearings being missed. This solution would also need to have a
+									way for management to be able to see and make updates to the calendar from a shared location.
+									<br><br>
+									<h3>Solution</h3>
+									Utilized Alteryx to extract and transform hearing data from the company's Snowflake database, and then load it into a CSV file.
+									To automate the process of adding the hearings to Outlook, a Visual Basic macro was developed. The macro would read the
+									data from the CSV exported from Alteryx using Power Query, and use that information to generate a meeting invite in Outlook
+									for each record of hearing data. The macro sent the meeting invites from an Outlook account made for the operations team to
+									overlook the hearing calendar. It also would record the global appointment ID that Outlook would assign to the meetings and
+									use them for tracking changes in the schedules. The automation was made to be cyclical. Alteryx would use the Excel file
+									to compare the hearings to see if they had Outlook IDs, and make any necessary changes.
+									<br><br>
+									<h3>Result</h3>
+									The consultants were able to more easily get a clear picture of when they had hearings and better avoid missing them. The
+									operations team was no longer spending time entering hearings into the consultants' personal calendars and could focus on other
+									tasks. They and management were given access to the calendar of the account sending the meeting invites; thus, allowing them to
+									have complete oversight of the hearings and be able to see when changes should be made.
+								</p>
+							</section>
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<section class="split contact">
+							<section>
+								<h3>Email</h3>
+								<p><a href="mailto:omusawrk@gmail.com">omusawrk@gmail.com</a></p>
+							</section>
+							<section>
+								<h3>Social</h3>
+								<ul class="icons alt">
+									<li><a href="https://www.linkedin.com/in/osamusa/" target="blank" class="icon brands alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
+									<li><a href="https://github.com/OsaMusa/" target="blank" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+								</ul>
+							</section>
+						</section>
+					</footer>
+
+				<!-- Copyright -->
+					<div id="copyright">
+						<ul><li>&copy; Osa Musa</li><li>Design: <a href="https://html5up.net" target="blank">HTML5 UP</a></li><li>Images: <a href="https://unsplash.com/" target="blank">Unsplash</a></li></ul>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
