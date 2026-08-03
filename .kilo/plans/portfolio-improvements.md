@@ -736,9 +736,116 @@ Also update the featured project link:
 
 ---
 
+### 13. Migrate About Page to Directory Format
+
+**Current file**: `about.html`
+**Target**: `/about/index.html`
+
+1. Create `/about/` directory
+2. Move `about.html` → `/about/index.html`
+3. Update navigation links in all files:
+   - `./about` → `/about/`
+   - `../about/` stays the same for nested pages
+4. Update internal asset paths if needed (should remain `../assets/` from within `/about/index.html`)
+
+---
+
+### 14. Define Projects Overview Page Content
+
+**File**: `/projects/index.html`
+
+Create a comprehensive overview page that:
+
+1. **Mirrors the homepage project grid** with all projects listed
+2. **Adds introductory content** at the top explaining the projects section
+3. **Groups projects by category** visually with section headers
+4. **Includes quick links** to each category landing page
+
+**Content structure**:
+```html
+<section class="post">
+    <header class="major">
+        <h1>All Projects</h1>
+    </header>
+    <p>
+        Browse my portfolio organized by category. Each project demonstrates different skills 
+        and approaches to solving real-world problems with data and automation.
+    </p>
+    <ul class="actions special">
+        <li><a href="automation/">View Automation Projects</a></li>
+        <li><a href="analysis/">View Analysis Projects</a></li>
+        <li><a href="visualization/">View Visualization Projects</a></li>
+        <li><a href="fullstack/">View Full-Stack Projects</a></li>
+    </ul>
+</section>
+
+<!-- Then show all projects grouped by category -->
+<h2>Automation</h2>
+<section class="posts">
+    <!-- Automation projects here -->
+</section>
+
+<h2>Analysis</h2>
+<section class="posts">
+    <!-- Analysis projects here -->
+</section>
+
+<!-- etc. -->
+```
+
+---
+
+### 15. Create Missing Case Study Pages
+
+The following projects on the homepage don't have detailed case study pages yet:
+
+- **Sales Data Analysis** → `/projects/analysis/sales-analysis/index.html`
+- **Texas Property Values** → `/projects/visualization/texas-property-values/index.html`
+- **ROR 2 Run Report Parser** → `/projects/analysis/ror2-parser/index.html`
+- **US Housing Prices by ZIP** → `/projects/visualization/housing-prices/index.html`
+
+Use the same template as existing case studies, including:
+- Problem statement
+- Solution approach
+- Technologies used
+- Results & impact metrics
+- "View Live" or "View Code" buttons where applicable
+
+---
+
+### 16. Set Up URL Redirects for Old Paths
+
+To prevent broken bookmarks and external links, create simple redirect pages at old URLs:
+
+**Files to create**:
+- `/ticketing-system.html` (redirect to `/projects/fullstack/ticketing-system/`)
+- `/mass-appraisal-tool.html` (redirect to `/projects/automation/mass-appraisal-tool/`)
+- `/report-generator.html` (redirect to `/projects/automation/report-generator/`)
+- `/outlook-automation.html` (redirect to `/projects/automation/outlook-automation/`)
+- `/appeal-form-automations.html` (redirect to `/projects/automation/appeal-form-automations/`)
+- `/about.html` (redirect to `/about/`)
+
+**Redirect HTML template**:
+```html
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Redirecting...</title>
+        <meta charset="utf-8" />
+        <meta http-equiv="refresh" content="0; url=/projects/fullstack/ticketing-system/" />
+        <script>window.location.href = "/projects/fullstack/ticketing-system/";</script>
+    </head>
+    <body>
+        <p>This page has moved. If you are not redirected, <a href="/projects/fullstack/ticketing-system/">click here</a>.</p>
+    </body>
+</html>
+```
+
+---
+
 ## LOW PRIORITY
 
-### 13. Optimize Images for Performance
+### 17. Optimize Images for Performance
 
 **Directory**: `images/`
 
@@ -753,7 +860,7 @@ Also update the featured project link:
 
 ---
 
-### 14. Verify Mobile Responsiveness
+### 18. Verify Mobile Responsiveness
 
 **Actions**:
 1. Test site on multiple screen sizes:
@@ -771,7 +878,7 @@ Also update the featured project link:
 
 ---
 
-### 15. Add Dark Mode Toggle
+### 19. Add Dark Mode Toggle
 
 **Files**: `assets/css/main.css`, `index.html`, `about/index.html`, `assets/js/main.js`
 
@@ -858,6 +965,144 @@ themeToggle?.addEventListener('click', function() {
 
 ---
 
+## LOWEST PRIORITY
+
+### 20. Add SEO Meta Tags and Structured Data
+
+**Files**: All HTML pages (`index.html`, `about/index.html`, all case study pages)
+
+#### Page-Specific Meta Descriptions
+
+Add unique `<meta name="description">` tags to each page:
+
+**Homepage**:
+```html
+<meta name="description" content="Portfolio of Osa Musa, a Data Analyst specializing in automation and business intelligence. View projects in Power BI, Python, SQL, and workflow automation." />
+```
+
+**About Page**:
+```html
+<meta name="description" content="Learn about Osa Musa's background in insurance analytics, technical skills, and professional experience as a Business Analyst and Data Analyst." />
+```
+
+**Case Study Pages**:
+```html
+<meta name="description" content="Case study: Ticketing System built with Microsoft Forms, Power Automate, and Power BI to track issues and automate status notifications." />
+```
+
+#### Open Graph Tags for Social Sharing
+
+Add to `<head>` of each page:
+
+```html
+<meta property="og:title" content="Osa Musa - Data Analyst Portfolio" />
+<meta property="og:description" content="View my portfolio of data analysis and automation projects." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://osamusa.github.io/portfolio-site/" />
+<meta property="og:image" content="https://osamusa.github.io/portfolio-site/images/[page-specific-image].jpg" />
+```
+
+#### Structured Data (JSON-LD)
+
+Add to homepage `<head>`:
+
+```html
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Osa Musa",
+    "jobTitle": "Data Analyst",
+    "url": "https://osamusa.github.io/portfolio-site/",
+    "sameAs": [
+        "https://www.linkedin.com/in/osamusa/",
+        "https://github.com/OsaMusa/"
+    ],
+    "knowsAbout": ["Data Analysis", "Business Intelligence", "Process Automation", "Power BI", "Python", "SQL"]
+}
+</script>
+```
+
+---
+
+### 21. Create Custom 404 Page
+
+**File**: `/404.html`
+
+GitHub Pages automatically serves `404.html` for missing pages. Create a helpful error page:
+
+```html
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Page Not Found - Osa Musa</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <link rel="stylesheet" href="assets/css/main.css" />
+        <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+    </head>
+    <body class="is-preload">
+        <div id="wrapper">
+            <header id="header">
+                <a href="./" class="logo">Osa Musa</a>
+            </header>
+            <nav id="nav">
+                <ul class="links">
+                    <li><a href="/">Home</a></li>
+                    <li>
+                        <a href="#" class="dropdown-toggle">Projects</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/projects/">All Projects</a></li>
+                            <li><a href="/projects/automation/">Automation</a></li>
+                            <li><a href="/projects/analysis/">Analysis</a></li>
+                            <li><a href="/projects/visualization/">Visualization</a></li>
+                            <li><a href="/projects/fullstack/">Full-Stack</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/about/">About</a></li>
+                </ul>
+            </nav>
+            <div id="main">
+                <section class="post">
+                    <header class="major">
+                        <h1>Page Not Found</h1>
+                    </header>
+                    <p>Sorry, the page you're looking for doesn't exist. It may have been moved or the URL might be incorrect.</p>
+                    <p>Here are some helpful links:</p>
+                    <ul>
+                        <li><a href="/">Return to Home</a></li>
+                        <li><a href="/projects/">Browse All Projects</a></li>
+                        <li><a href="/about/">Learn About Me</a></li>
+                    </ul>
+                </section>
+            </div>
+            <footer id="footer">
+                <!-- Footer content -->
+            </footer>
+        </div>
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/main.js"></script>
+    </body>
+</html>
+```
+
+---
+
+### 22. Verify GitHub Pages Configuration
+
+**Actions**:
+1. Confirm repository settings point to correct branch (usually `main` or `gh-pages`)
+2. Verify base path works correctly for subdirectory navigation
+3. Test that all internal links use relative paths or absolute paths with correct base
+4. If using a custom domain, ensure DNS is configured properly
+5. After deployment, manually test navigation across all pages including:
+   - Homepage → Project cards → Case studies
+   - Category landing pages → Individual projects
+   - Dropdown navigation on all pages
+   - Back buttons within case studies
+
+---
+
 ## Implementation Notes
 
 1. **Test after each change**: Deploy to GitHub Pages incrementally and verify changes render correctly
@@ -868,6 +1113,9 @@ themeToggle?.addEventListener('click', function() {
 6. **GitHub Pages deployment**: After making changes, commit and push to trigger GitHub Pages rebuild
 7. **Path consistency**: All internal links should use trailing slashes for directories (e.g., `/projects/automation/` not `/projects/automation`)
 8. **Asset paths**: Remember that case study pages in subdirectories need `../../` to reach root-level assets
+9. **Redirects are temporary**: Old redirect pages (Task 16) can be removed after a few months once external links update
+10. **SEO is ongoing**: Task #20 provides baseline SEO; continue adding meta descriptions as new projects are created
+11. **Priority order**: Complete HIGH PRIORITY tasks first (1-6), then MEDIUM (7-16), then LOW (17-19), then LOWEST (20-22)
 
 ---
 
@@ -887,6 +1135,13 @@ themeToggle?.addEventListener('click', function() {
 | 10 | All existing `.html` files → new `/projects/` subdirectories |
 | 11 | New: `/projects/index.html`, `/projects/*/index.html` |
 | 12 | `index.html` |
-| 13 | `images/*`, all HTML files with `<img>` tags |
-| 14 | `assets/css/main.css` |
-| 15 | `assets/css/main.css`, `index.html`, `about/index.html`, `assets/js/main.js` |
+| 13 | `about.html` → `/about/index.html` |
+| 14 | `/projects/index.html` (new) |
+| 15 | New case study pages under `/projects/` |
+| 16 | Old `.html` files as redirects |
+| 17 | `images/*`, all HTML files with `<img>` tags |
+| 18 | `assets/css/main.css` |
+| 19 | `assets/css/main.css`, `index.html`, `about/index.html`, `assets/js/main.js` |
+| 20 | All HTML pages |
+| 21 | `/404.html` (new) |
+| 22 | GitHub repository settings |
