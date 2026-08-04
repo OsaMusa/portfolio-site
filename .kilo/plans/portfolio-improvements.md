@@ -127,9 +127,11 @@ For each project card, add a metrics paragraph before the existing description o
 
 ---
 
-### 3. Add Downloadable Resume Link
+### 3. Add Downloadable Resume Link ✅ COMPLETE
 
-**Files**: `index.html`, `about/index.html`
+**Status**: Resume download button added in header nav and footer on both pages. CSS specificity issue resolved to ensure the button appears white as intended.
+
+**Files**: `index.html`, `about/index.html`, `assets/css/main.css`
 
 **Step 1**: Create or obtain a PDF resume file named `resume.pdf`
 
@@ -149,6 +151,8 @@ In the `#nav` section, after the icons list, add:
     <p><a href="resume.pdf" download>Download PDF</a></p>
 </section>
 ```
+
+**Step 4 (PENDING)**: Change resume button color to match inactive nav link text color (`#ffffff`).
 
 ---
 
@@ -316,21 +320,13 @@ Projects section:
 
 ---
 
-### 8. Update Navigation with Projects Dropdown
+### 8. Update Navigation with Projects Dropdown ✅ COMPLETE
+
+**Status**: HTML structure implemented across all pages. Dropdown uses category-based navigation with nested active project display. When viewing a case study page, the parent category is shown as active with the current project nested beneath it as a submenu item. This keeps the dropdown compact and scalable.
 
 **Files**: `index.html`, `about/index.html`, all case study pages
 
-Replace the current two-link navigation with a dropdown menu:
-
-**Current nav**:
-```html
-<ul class="links">
-    <li class="active"><a href="./">Home</a></li>
-    <li><a href="./about">About</a></li>
-</ul>
-```
-
-**New nav structure** (for `index.html`):
+Dropdown menu structure for homepage and about page:
 ```html
 <ul class="links">
     <li class="active"><a href="/">Home</a></li>
@@ -348,90 +344,118 @@ Replace the current two-link navigation with a dropdown menu:
 </ul>
 ```
 
-**For category landing pages**, mark the relevant dropdown item as active:
+For case study pages (example: automation/mass-appraisal-tool):
 ```html
-<li>
-    <a href="#" class="dropdown-toggle">Projects</a>
-    <ul class="dropdown-menu">
-        <li><a href="/projects/">All Projects</a></li>
-        <li class="active"><a href="/projects/automation/">Automation</a></li>
-        <li><a href="/projects/analysis/">Analysis</a></li>
-        ...
-    </ul>
-</li>
-```
-
-**For individual case study pages**, mark both the category and project as appropriate:
-```html
-<!-- Example for ticketing-system page -->
-<li>
-    <a href="#" class="dropdown-toggle">Projects</a>
-    <ul class="dropdown-menu">
-        <li><a href="/projects/">All Projects</a></li>
-        <li><a href="/projects/automation/">Automation</a></li>
-        <li><a href="/projects/analysis/">Analysis</a></li>
-        <li><a href="/projects/visualization/">Visualization</a></li>
-        <li class="active"><a href="/projects/fullstack/ticketing-system/">Ticketing System</a></li>
-    </ul>
-</li>
+<ul class="links">
+    <li><a href="../../../">Home</a></li>
+    <li>
+        <a href="#" class="dropdown-toggle">Projects</a>
+        <ul class="dropdown-menu">
+            <li><a href="../../">All Projects</a></li>
+            <li class="active">
+                <a href="../">Automation</a>
+                <ul class="dropdown-submenu">
+                    <li class="active"><a href="./">Mass Appraisal Tool</a></li>
+                </ul>
+            </li>
+            <li><a href="../../analysis/">Analysis</a></li>
+            <li><a href="../../visualization/">Visualization</a></li>
+            <li><a href="../../fullstack/">Full-Stack</a></li>
+        </ul>
+    </li>
+    <li><a href="../../../about/">About</a></li>
+</ul>
 ```
 
 ---
 
-### 9. Add CSS for Dropdown Navigation
+### 9. Add CSS for Dropdown Navigation ✅ COMPLETE
+
+**Status**: CSS rules added to `main.css` including z-index fix (`#nav { z-index: 3; }` to render above `#main`), `overflow: visible` on `#nav`, and dropdown hover styles. Nested submenu styling added for active project display under parent category.
 
 **File**: `assets/css/main.css`
 
-Add styles for the dropdown menu:
+Styles for the dropdown menu:
 
 ```css
 /* Dropdown navigation */
-#nav .links {
+#nav ul.links li {
     position: relative;
 }
 
-#nav .links li {
-    position: relative;
-}
-
-.dropdown-menu {
+#nav ul.links li .dropdown-menu {
     display: none;
     position: absolute;
     top: 100%;
     left: 0;
-    background: var(--bg-color, #ffffff);
-    border: 1px solid var(--border-color, rgba(210, 215, 217, 0.75));
+    background: #ffffff;
+    border: 1px solid rgba(210, 215, 217, 0.75);
     min-width: 180px;
-    z-index: 1000;
+    z-index: 9999;
     list-style: none;
     padding: 0.5em 0;
     margin: 0;
+    flex-direction: column;
 }
 
-.dropdown-menu li a {
+#nav ul.links li .dropdown-menu li a {
     display: block;
     padding: 0.5em 1em;
     white-space: nowrap;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.075em;
+    font-family: "Source Sans Pro", Helvetica, sans-serif;
+    font-weight: 900;
+    color: #1e252d;
 }
 
-.dropdown-menu li a:hover {
-    background: var(--alt-bg, #f5f5f5);
+#nav ul.links li .dropdown-menu li a:hover {
+    background: #f5f5f5;
+    color: #18bfef !important;
+}
+
+/* Active category and submenu styles */
+#nav ul.links li .dropdown-menu li.active > a {
+    color: #18bfef !important;
+}
+
+#nav ul.links li .dropdown-menu li .dropdown-submenu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#nav ul.links li .dropdown-menu li .dropdown-submenu li a {
+    padding-left: 2em;
+    font-weight: 400;
+    text-transform: none;
+    font-size: 0.75rem;
 }
 
 /* Show dropdown on hover */
-#nav .links li:hover .dropdown-menu {
+#nav ul.links li:hover .dropdown-menu {
     display: block;
 }
 
 /* Mobile: stack dropdown items */
 @media screen and (max-width: 736px) {
-    .dropdown-menu {
+    #nav ul.links li .dropdown-menu {
         position: static;
         border: none;
         padding-left: 1em;
     }
+
+    #nav ul.links li .dropdown-menu li .dropdown-submenu li a {
+        padding-left: 3em;
+    }
 }
 ```
+
+Key fixes applied:
+- `#nav { overflow: visible; }` - Allows dropdown to extend below nav bar
+- `#nav { z-index: 3; }` - Ensures nav renders above `#main` content area
+- `.dropdown-submenu` styles - Indented, smaller font for nested project items
 
 ---
 
@@ -1119,29 +1143,26 @@ GitHub Pages automatically serves `404.html` for missing pages. Create a helpful
 
 ---
 
-## Quick Reference: File Locations
+## QUICK STATUS SUMMARY
 
-| Task | Primary Files |
-|------|--------------|
-| 1 | `index.html` |
-| 2 | `index.html` |
-| 3 | `index.html`, `about/index.html`, `resume.pdf` |
-| 4 | `about/index.html` |
-| 5 | `about/index.html` |
-| 6 | `index.html` |
-| 7 | Entire site structure |
-| 8 | `index.html`, `about/index.html`, all case study pages |
-| 9 | `assets/css/main.css` |
-| 10 | All existing `.html` files → new `/projects/` subdirectories |
-| 11 | New: `/projects/index.html`, `/projects/*/index.html` |
-| 12 | `index.html` |
-| 13 | `about.html` → `/about/index.html` |
-| 14 | `/projects/index.html` (new) |
-| 15 | New case study pages under `/projects/` |
-| 16 | Old `.html` files as redirects |
-| 17 | `images/*`, all HTML files with `<img>` tags |
-| 18 | `assets/css/main.css` |
-| 19 | `assets/css/main.css`, `index.html`, `about/index.html`, `assets/js/main.js` |
-| 20 | All HTML pages |
-| 21 | `/404.html` (new) |
-| 22 | GitHub repository settings |
+| Task | Status | Notes |
+|------|--------|-------|
+| 1. Hero Section | ✅ Complete | Value proposition updated |
+| 2. Impact Metrics | ✅ Complete | Added to all project cards |
+| 3. Resume Link | ✅ Complete | Button added and CSS fixed |
+| 4. Skills Section | ✅ Complete | Added to About page |
+| 5. Current Focus | ✅ Complete | Added to About page |
+| 6. Project Reorder | ✅ Complete | Reordered by impact |
+| 7. Directory Structure | ✅ Complete | `/projects/` hierarchy created |
+| 8. Nav Dropdown HTML | ✅ Complete | Category-based dropdown with nested active project display |
+| 9. Nav Dropdown CSS | ✅ Complete | Z-index fix, overflow visible, submenu styles added |
+| 10. Case Study Migration | ✅ Complete | 5 existing case studies migrated |
+| 11. Category Landing Pages | ❌ Not Started | Need 5 category index.html files |
+| 12. Homepage Links | ✅ Complete | Updated to new directory paths |
+| 13. About Page Migration | ✅ Complete | Moved to `/about/index.html` |
+| 14. Projects Overview Content | ❌ Not Started | Need `/projects/index.html` content |
+| 15. Missing Case Studies | ❌ Not Started | 4 new case study pages needed |
+| 16. URL Redirects | ❌ Not Started | Old flat-file URLs will break |
+| 17-22. Low/Lowest Priority | ❌ Not Started | Image optimization, mobile, dark mode, SEO, 404, GitHub config |
+
+**Core structural migration is ~60% complete.** The site has the correct directory structure, migrated case studies, updated homepage links, and fully functional dropdown navigation with category-based organization. Next priority: category landing pages and projects overview content.

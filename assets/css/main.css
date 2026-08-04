@@ -2110,7 +2110,7 @@ input, select, textarea {
 			line-height: 4rem;
 			border-radius: 4rem;
 			text-indent: 4rem;
-			overflow: hidden;
+		overflow: visible;
 			padding: 0;
 			white-space: nowrap;
 		}
@@ -3235,10 +3235,10 @@ input, select, textarea {
 			height: 100%;
 			background-color: #212931;
 			background-image: url("../../images/overlay.png"), linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url("../../images/bg.jpg");
-			background-size: auto,								auto,														100% auto;
-			background-position: center,								center,														top center;
-			background-repeat: repeat,								no-repeat,													no-repeat;
-			background-attachment: scroll,								scroll,														scroll;
+			background-size: auto, auto, 100% auto;
+			background-position: center, center, top center;
+			background-repeat: repeat, no-repeat, no-repeat;
+			background-attachment: scroll, scroll, scroll;
 			z-index: -1;
 		}
 
@@ -3276,7 +3276,7 @@ input, select, textarea {
 		@media screen and (orientation: portrait) {
 
 			#wrapper > .bg {
-				background-size: auto,								auto,														auto 175%;
+				background-size: auto, auto, auto 175%;
 			}
 
 		}
@@ -3619,12 +3619,12 @@ input, select, textarea {
 		height: 4rem;
 		line-height: 4rem;
 		margin: -4rem auto 0 auto;
-		overflow: hidden;
+		overflow: visible;
 		padding: 0 2rem 0 0;
 		position: relative;
 		width: calc(100% - 4rem);
 		max-width: 72rem;
-		z-index: 2;
+		z-index: 3;
 	}
 
 		#nav ul.divided li {
@@ -4620,7 +4620,6 @@ input, select, textarea {
 			right: 0;
 			text-align: right;
 			top: 0;
-			vertical-align: middle;
 			width: 7rem;
 		}
 
@@ -4689,6 +4688,17 @@ input, select, textarea {
 	}
 
 /* Dropdown navigation */
+#nav ul.actions .button {
+	color: #ffffff !important;
+	background-color: transparent;
+	box-shadow: inset 0 0 0 2px #ffffff;
+}
+
+#nav ul.actions .button:hover {
+	color: #18bfef !important;
+	box-shadow: inset 0 0 0 2px #18bfef;
+}
+
 #nav ul.links li {
 	position: relative;
 }
@@ -4701,7 +4711,7 @@ input, select, textarea {
 	background: #ffffff;
 	border: 1px solid rgba(210, 215, 217, 0.75);
 	min-width: 180px;
-	z-index: 1000;
+	z-index: 9999;
 	list-style: none;
 	padding: 0.5em 0;
 	margin: 0;
@@ -4730,9 +4740,25 @@ input, select, textarea {
 	color: #18bfef !important;
 }
 
+#nav ul.links li .dropdown-menu li.active > a {
+	color: #18bfef !important;
+}
+
+#nav ul.links li .dropdown-menu li .dropdown-submenu {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+#nav ul.links li .dropdown-menu li .dropdown-submenu li a {
+	padding-left: 2em;
+	font-weight: 400;
+	text-transform: none;
+	font-size: 0.75rem;
+}
+
 #nav ul.links li:hover .dropdown-menu {
-	display: flex;
-	flex-direction: column;
+	display: block;
 }
 
 @media screen and (max-width: 736px) {
@@ -4740,5 +4766,9 @@ input, select, textarea {
 		position: static;
 		border: none;
 		padding-left: 1em;
+	}
+
+	#nav ul.links li .dropdown-menu li .dropdown-submenu li a {
+		padding-left: 3em;
 	}
 }
