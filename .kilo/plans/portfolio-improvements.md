@@ -635,7 +635,7 @@ Each category landing page should:
                         <header>
                             <h2>Mass Appraisal Tool</h2>
                         </header>
-                        <a href="mass-appraisal-tool/" class="image fit"><img src="../../images/mass-appraisal-tool-pic.jpg" alt="" /></a>
+                        <a href="mass-appraisal-tool/" class="image fit"><img src="../../assets/images/mass-appraisal-tool-pic.jpg" alt="" /></a>
                         <p>A tool using the company's chosen methodologies to valuate properties against an assessor's proposed value.</p>
                         <ul class="actions special">
                             <li><a href="mass-appraisal-tool/" class="button">Learn More</a></li>
@@ -647,7 +647,7 @@ Each category landing page should:
                         <header>
                             <h2>Report Generator</h2>
                         </header>
-                        <a href="report-generator/" class="image fit"><img src="../../images/report-generator-pic.jpg" alt="" /></a>
+                        <a href="report-generator/" class="image fit"><img src="../../assets/images/report-generator-pic.jpg" alt="" /></a>
                         <p>A macro that transfers data (text, images, charts, etc.) from an Excel workbook to a Word document.</p>
                         <ul class="actions special">
                             <li><a href="report-generator/" class="button">Learn More</a></li>
@@ -659,7 +659,7 @@ Each category landing page should:
                         <header>
                             <h2>Outlook Automation</h2>
                         </header>
-                        <a href="outlook-automation/" class="image fit"><img src="../../images/outlook-automation-pic.jpg" alt="" /></a>
+                        <a href="outlook-automation/" class="image fit"><img src="../../assets/images/outlook-automation-pic.jpg" alt="" /></a>
                         <p>A flow that updates consultant Outlook calendars to show upcoming appeal hearings.</p>
                         <ul class="actions special">
                             <li><a href="outlook-automation/" class="button">Learn More</a></li>
@@ -671,7 +671,7 @@ Each category landing page should:
                         <header>
                             <h2>Appeal Form Automations</h2>
                         </header>
-                        <a href="appeal-form-automations/" class="image fit"><img src="../../images/appeal-form-automations-pic.jpg" alt="" /></a>
+                        <a href="appeal-form-automations/" class="image fit"><img src="../../assets/images/appeal-form-automations-pic.jpg" alt="" /></a>
                         <p>A set of automations made for filling out large numbers of appeal forms specific to the assessor and appeal type.</p>
                         <ul class="actions special">
                             <li><a href="appeal-form-automations/" class="button">Learn More</a></li>
@@ -871,14 +871,14 @@ To prevent broken bookmarks and external links, create simple redirect pages at 
 
 ### 17. Optimize Images for Performance
 
-**Directory**: `images/`
+**Directory**: `assets/images/`
 
 **Actions**:
 1. Compress all existing images using a tool like TinyPNG, ImageOptim, or Squoosh
 2. Convert JPEG/PNG images to WebP format where browser support allows
 3. Add `loading="lazy"` attribute to all `<img>` tags that are not in the initial viewport:
    ```html
-   <img src="images/ticketing-system-pic.jpg" alt="..." loading="lazy" />
+   <img src="assets/images/ticketing-system-pic.jpg" alt="..." loading="lazy" />
    ```
 4. Ensure image dimensions match their display size to avoid unnecessary downloads
 
@@ -1023,7 +1023,7 @@ Add to `<head>` of each page:
 <meta property="og:description" content="View my portfolio of data analysis and automation projects." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://osamusa.github.io/portfolio-site/" />
-<meta property="og:image" content="https://osamusa.github.io/portfolio-site/images/[page-specific-image].jpg" />
+<meta property="og:image" content="https://osamusa.github.io/portfolio-site/assets/images/[page-specific-image].jpg" />
 ```
 
 #### Structured Data (JSON-LD)
