@@ -16,6 +16,11 @@ async function loadComponent(id, url) {
                 $('#navPanel').find('.icons, .icon').addClass('alt');
             }
         }
+
+        // If loading project buttons, configure them
+        if (id === 'prj-btns-placeholder') {
+            configureProjectButtons();
+        }
     } catch (error) {
         console.error(error);
     }
@@ -68,9 +73,54 @@ function setActiveNavLink() {
     }
 }
 
+// Configure project action buttons based on meta tags and URL path
+function configureProjectButtons() {
+    const githubUrl = document.querySelector('meta[name="project-github"]')?.content;
+    const demoUrl = document.querySelector('meta[name="project-demo"]')?.content;
+
+    // Show/hide View Code button
+    const viewCodeBtn = document.getElementById('view-code-btn');
+    if (viewCodeBtn) {
+        if (githubUrl) {
+            viewCodeBtn.querySelector('a').href = githubUrl;
+            viewCodeBtn.style.display = '';
+        } else {
+            viewCodeBtn.remove();
+        }
+    }
+
+    // Show/hide View Live button
+    const viewLiveBtn = document.getElementById('view-live-btn');
+    if (viewLiveBtn) {
+        if (demoUrl) {
+            viewLiveBtn.querySelector('a').href = demoUrl;
+            viewLiveBtn.style.display = '';
+        } else {
+            viewLiveBtn.remove();
+        }
+    }
+
+    // Set category name from URL path
+    const backBtn = document.getElementById('back-to-category-btn');
+    if (backBtn) {
+        const pathParts = window.location.pathname.split('/').filter(Boolean);
+        // Expected structure: /projects/{category}/...
+        const categoryIndex = pathParts.indexOf('projects');
+        let categoryName = 'Projects';
+        if (categoryIndex !== -1 && pathParts[categoryIndex + 1]) {
+            categoryName = pathParts[categoryIndex + 1]
+                .split('-')
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(' ');
+        }
+        backBtn.querySelector('a').textContent = `Back to ${categoryName}`;
+    }
+}
+
 // Initialize components when DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
     loadComponent('header-placeholder', '/assets/html/header.html');
     loadComponent('nav-placeholder', '/assets/html/nav.html');
+    loadComponent('prj-btns-placeholder', '/assets/html/project-buttons.html');
     loadComponent('footer-placeholder', '/assets/html/footer.html');
 });

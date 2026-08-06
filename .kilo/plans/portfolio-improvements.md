@@ -594,30 +594,17 @@ Each category landing page should:
         <noscript><link rel="stylesheet" href="../../assets/css/noscript.css" /></noscript>
     </head>
     <body class="is-preload">
+        
+        <!-- Wrapper -->
         <div id="wrapper">
-            <header id="header">
-                <a href="../../" class="logo">Osa Musa</a>
-            </header>
-            <nav id="nav">
-                <ul class="links">
-                    <li><a href="../../">Home</a></li>
-                    <li>
-                        <a href="#" class="dropdown-toggle">Projects</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="../">All Projects</a></li>
-                            <li class="active"><a href="./">Automation</a></li>
-                            <li><a href="../analysis/">Analysis</a></li>
-                            <li><a href="../visualization/">Visualization</a></li>
-                            <li><a href="../fullstack/">Full-Stack</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="../../about/">About</a></li>
-                </ul>
-                <ul class="icons">
-                    <li><a href="https://www.linkedin.com/in/osamusa/" target="_blank" class="icon brands alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
-                    <li><a href="https://github.com/OsaMusa/" target="_blank" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
-                </ul>
-            </nav>
+            
+            <!-- Header -->
+            <div id="header-placeholder"></div>
+
+            <!-- Nav -->
+            <div id="nav-placeholder"></div>
+
+            <!-- Main -->
             <div id="main">
                 <section class="post">
                     <header class="major">
@@ -679,16 +666,12 @@ Each category landing page should:
                     </article>
                 </section>
             </div>
-            <footer id="footer">
-                <!-- Footer content -->
-            </footer>
-            <div id="copyright">
-                <ul>
-                    <li>&copy; Osa Musa</li>
-                    <li>Design: <a href="https://html5up.net" target="_blank">HTML5 UP</a></li>
-                </ul>
-            </div>
+            
+            <!-- Footer -->
+            <div id="header-placeholder"></div>
         </div>
+
+        <!-- Scripts -->
         <script src="../../assets/js/jquery.min.js"></script>
         <script src="../../assets/js/jquery.scrollex.min.js"></script>
         <script src="../../assets/js/jquery.scrolly.min.js"></script>
@@ -696,6 +679,7 @@ Each category landing page should:
         <script src="../../assets/js/breakpoints.min.js"></script>
         <script src="../../assets/js/util.js"></script>
         <script src="../../assets/js/main.js"></script>
+        <script src="../../assets/js/components.js"></script>
     </body>
 </html>
 ```
