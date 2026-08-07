@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<!--
+    Category Landing Page Template
+    
+    USAGE:
+    1. Copy this template to /projects/{category}/index.html
+    2. components.js auto-detects #projects-container and renders projects
+       from /assets/data/projects.json based on the URL path segment
+    
+    The category slug is extracted from the URL: /projects/{category}/
+    Title and description come from projects.json, not hardcoded here.
+-->
+<html>
+    <head>
+        <title>Projects - Osa Musa</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <link rel="stylesheet" href="../../assets/css/main.css" />
+        <noscript><link rel="stylesheet" href="../../assets/css/noscript.css" /></noscript>
+    </head>
+    <body class="is-preload">
+        
+        <div id="wrapper">
+            
+            <div id="header-placeholder"></div>
+
+            <div id="nav-placeholder"></div>
+
+            <div id="main">
+                <section class="post">
+                    <header class="major">
+                        <h1 id="category-title">Projects</h1>
+                    </header>
+                    <p id="category-description"></p>
+                </section>
+                
+                <section class="posts" id="projects-container"></section>
+            </div>
+            
+            <div id="footer-placeholder"></div>
+        </div>
+
+        <script src="../../assets/js/jquery.min.js"></script>
+        <script src="../../assets/js/jquery.scrollex.min.js"></script>
+        <script src="../../assets/js/jquery.scrolly.min.js"></script>
+        <script src="../../assets/js/browser.min.js"></script>
+        <script src="../../assets/js/breakpoints.min.js"></script>
+        <script src="../../assets/js/util.js"></script>
+        <script src="../../assets/js/main.js"></script>
+        <script src="../../assets/js/components.js"></script>
+    </body>
+</html>

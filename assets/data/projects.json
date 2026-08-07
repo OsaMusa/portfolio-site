@@ -1,0 +1,109 @@
+{
+    "categories": {
+        "automation": {
+            "title": "Automation",
+            "description": "These projects focus on streamlining workflows, reducing manual effort, and building tools that save time. From report generation to calendar management, each automation delivers measurable efficiency gains.",
+            "projects": [
+                {
+                    "slug": "mass-appraisal-tool",
+                    "title": "Mass Appraisal Tool",
+                    "image": "mass-appraisal-tool-pic.jpg",
+                    "impact": "Valuated 500+ properties per cycle with 92% accuracy rate, supporting 200+ appeal cases annually.",
+                    "description": "A tool using the company's chosen methodologies to valuate properties against an assessor's proposed value.",
+                    "homepage": true,
+                    "homepageOrder": 3
+                },
+                {
+                    "slug": "report-generator",
+                    "title": "Report Generator",
+                    "image": "report-generator-pic.jpg",
+                    "impact": "Automated 15+ hours of manual reporting per week across 20 reports, eliminating copy-paste errors.",
+                    "description": "A macro that transfers data (text, images, charts, etc.) from an Excel workbook to a Word document.",
+                    "homepage": true,
+                    "homepageOrder": 4
+                },
+                {
+                    "slug": "outlook-automation",
+                    "title": "Outlook Automation",
+                    "image": "outlook-automation-pic.jpg",
+                    "impact": "Saved 10+ hours weekly by automating calendar updates for 15 consultants handling appeal hearings.",
+                    "description": "A flow that updates consultant Outlook calendars to show upcoming appeal hearings.",
+                    "homepage": false,
+                    "homepageOrder": null
+                },
+                {
+                    "slug": "appeal-form-automations",
+                    "title": "Appeal Form Automations",
+                    "image": "appeal-form-automations-pic.jpg",
+                    "impact": "Processed 300+ forms automatically, reducing manual entry time by 75% and eliminating data entry errors.",
+                    "description": "A set of automations made for filling out large numbers of appeal forms specific to the assessor and appeal type.",
+                    "homepage": false,
+                    "homepageOrder": null
+                }
+            ]
+        },
+        "analysis": {
+            "title": "Analysis",
+            "description": "These projects demonstrate analytical thinking through exploratory data analysis, statistical methods, and database-driven insights. Each project answers real-world questions or enables deeper understanding of complex datasets.",
+            "projects": [
+                {
+                    "slug": "sales-analysis",
+                    "title": "Sales Data Analysis",
+                    "image": "sales-data-analysis-pic.jpg",
+                    "impact": "Analyzed 12 months of sales data to identify trends, answer business questions, and inform strategy decisions.",
+                    "description": "An exploratory data analysis on a year of sales data used to answer business related questions.",
+                    "homepage": true,
+                    "homepageOrder": 5
+                },
+                {
+                    "slug": "ror2-parser",
+                    "title": "ROR 2 Run Report Parser",
+                    "image": "ror2-run-report-db.jpg",
+                    "impact": "Parses and stores run data from 100+ games, enabling trend analysis and performance tracking.",
+                    "description": "An xml parser that reads Risk of Rain 2 saved run reports and updates the associated relational database.",
+                    "homepage": false,
+                    "homepageOrder": null
+                }
+            ]
+        },
+        "visualization": {
+            "title": "Visualization",
+            "description": "These projects transform raw data into interactive visual experiences. From geographic heatmaps to time-series dashboards, each visualization makes complex datasets accessible and actionable.",
+            "projects": [
+                {
+                    "slug": "housing-prices",
+                    "title": "US Average Housing Prices by ZIP",
+                    "image": "us-property-values-pic-FEATURED.jpg",
+                    "impact": "Visualizes housing data for 40,000+ ZIP codes across 20+ years of Zillow data. Updated monthly with fresh datasets.",
+                    "description": "A site with visualizations that show the average home values across the US by zip code since January, 2000. All data is provided by Zillow Group, and is updated monthly. Visit the site and see how the values in the areas that interest you have changed. For a look into the code behind it, you can visit my Github repository by clicking the button below.",
+                    "homepage": true,
+                    "homepageOrder": 1
+                },
+                {
+                    "slug": "texas-property-values",
+                    "title": "Texas Property Values",
+                    "image": "texas-property-values-pic.jpg",
+                    "impact": "Interactive heatmap covering 254 Texas counties, visualizing 5+ years of property value trends.",
+                    "description": "A heatmap showing the average property value of houses in Texas by county from January, 2015 - June, 2020.",
+                    "homepage": false,
+                    "homepageOrder": null
+                }
+            ]
+        },
+        "fullstack": {
+            "title": "Full-Stack",
+            "description": "These projects span the entire development stack, combining front-end interfaces with back-end logic and data storage. Each demonstrates end-to-end problem solving from user input to delivered solution.",
+            "projects": [
+                {
+                    "slug": "ticketing-system",
+                    "title": "Ticketing System",
+                    "image": "ticketing-system-pic.jpg",
+                    "impact": "Tracked 50+ issues monthly, reduced resolution time by 30%, automated status notifications to reporters.",
+                    "description": "A system built to track reported issues, who they're assigned to, and send status updates to issue reporters.",
+                    "homepage": true,
+                    "homepageOrder": 2
+                }
+            ]
+        }
+    }
+}

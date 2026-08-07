@@ -117,10 +117,127 @@ function configureProjectButtons() {
     }
 }
 
+// Load homepage projects from centralized data file
+async function loadHomepageProjects() {
+    const featuredContainer = document.getElementById('featured-container');
+    const postsContainer = document.getElementById('homepage-posts');
+    if (!featuredContainer && !postsContainer) return;
+
+    try {
+        const response = await fetch('/assets/data/projects.json');
+        if (!response.ok) throw new Error('Failed to load projects data');
+        const data = await response.json();
+
+        const allProjects = [];
+        Object.entries(data.categories).forEach(([categoryKey, category]) => {
+            category.projects.forEach(project => {
+                allProjects.push({ ...project, _category: categoryKey });
+            });
+        });
+
+        const homepageProjects = allProjects
+            .filter(p => p.homepage)
+            .sort((a, b) => a.homepageOrder - b.homepageOrder);
+
+        const featured = homepageProjects.find(p => p.homepageOrder === 1);
+        const gridProjects = homepageProjects.filter(p => p.homepageOrder !== 1);
+
+        if (featured && featuredContainer) {
+            featuredContainer.innerHTML = `
+                <article class="post featured">
+                    <header class="major">
+                        <h2>
+                            <a href="projects/${featured._category}/${featured.slug}/">
+                                ${featured.title}
+                            </a>
+                        </h2>
+                        ${featured.impact ? `<p><strong>Impact:</strong> ${featured.impact}</p>` : ''}
+                        <p>${featured.description}</p>
+                    </header>
+                    <a href="projects/${featured._category}/${featured.slug}/" class="image main">
+                        <img src="assets/images/${featured.image}" alt="${featured.title}" />
+                    </a>
+                    <ul class="actions special">
+                        <li><a href="projects/${featured._category}/${featured.slug}/" class="button">Learn More</a></li>
+                    </ul>
+                </article>
+            `;
+        }
+
+        if (gridProjects.length > 0 && postsContainer) {
+            postsContainer.innerHTML = gridProjects.map(project => `
+                <article>
+                    <header>
+                        <h2>${project.title}</h2>
+                    </header>
+                    <a href="projects/${project._category}/${project.slug}/" class="image fit">
+                        <img src="assets/images/${project.image}" alt="${project.title}" />
+                    </a>
+                    ${project.impact ? `<p><strong>Impact:</strong> ${project.impact}</p>` : ''}
+                    <p>${project.description}</p>
+                    <ul class="actions special">
+                        <li><a href="projects/${project._category}/${project.slug}/" class="button">Full Description</a></li>
+                    </ul>
+                </article>
+            `).join('');
+        }
+    } catch (error) {
+        console.error('Error loading homepage projects:', error);
+    }
+}
+
+// Load category projects from centralized data file
+async function loadCategoryProjects() {
+    const container = document.getElementById('projects-container');
+    if (!container) return;
+
+    const pathParts = window.location.pathname.split('/').filter(Boolean);
+    const projectsIndex = pathParts.indexOf('projects');
+    if (projectsIndex === -1 || !pathParts[projectsIndex + 1]) return;
+
+    const categorySlug = pathParts[projectsIndex + 1];
+
+    try {
+        const response = await fetch('/assets/data/projects.json');
+        if (!response.ok) throw new Error('Failed to load projects data');
+        const data = await response.json();
+
+        const category = data.categories[categorySlug];
+        if (!category) {
+            console.warn(`No data found for category: ${categorySlug}`);
+            return;
+        }
+
+        document.title = `${category.title} Projects - Osa Musa`;
+        document.getElementById('category-title').textContent = `${category.title} Projects`;
+        document.getElementById('category-description').textContent = category.description;
+
+        container.innerHTML = category.projects.map(project => `
+            <article>
+                <header>
+                    <h2>${project.title}</h2>
+                </header>
+                <a href="${project.slug}/" class="image fit">
+                    <img src="../../assets/images/${project.image}" alt="${project.title}" />
+                </a>
+                ${project.impact ? `<p><strong>Impact:</strong> ${project.impact}</p>` : ''}
+                <p>${project.description}</p>
+                <ul class="actions special">
+                    <li><a href="${project.slug}/" class="button">Learn More</a></li>
+                </ul>
+            </article>
+        `).join('');
+    } catch (error) {
+        console.error('Error loading category projects:', error);
+    }
+}
+
 // Initialize components when DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
     loadComponent('header-placeholder', '/assets/html/header.html');
     loadComponent('nav-placeholder', '/assets/html/nav.html');
     loadComponent('prj-btns-placeholder', '/assets/html/project-buttons.html');
     loadComponent('footer-placeholder', '/assets/html/footer.html');
+    loadCategoryProjects();
+    loadHomepageProjects();
 });
