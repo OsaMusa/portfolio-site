@@ -568,7 +568,6 @@ For each existing case study page (`ticketing-system.html`, `mass-appraisal-tool
 ### 11. Create Category Landing Pages
 
 **Files**: 
-- `/projects/index.html`
 - `/projects/automation/index.html`
 - `/projects/analysis/index.html`
 - `/projects/visualization/index.html`
@@ -821,39 +820,9 @@ Use the same template as existing case studies, including:
 
 ---
 
-### 16. Set Up URL Redirects for Old Paths
-
-To prevent broken bookmarks and external links, create simple redirect pages at old URLs:
-
-**Files to create**:
-- `/ticketing-system.html` (redirect to `/projects/fullstack/ticketing-system/`)
-- `/mass-appraisal-tool.html` (redirect to `/projects/automation/mass-appraisal-tool/`)
-- `/report-generator.html` (redirect to `/projects/automation/report-generator/`)
-- `/outlook-automation.html` (redirect to `/projects/automation/outlook-automation/`)
-- `/appeal-form-automations.html` (redirect to `/projects/automation/appeal-form-automations/`)
-- `/about.html` (redirect to `/about/`)
-
-**Redirect HTML template**:
-```html
-<!DOCTYPE HTML>
-<html>
-    <head>
-        <title>Redirecting...</title>
-        <meta charset="utf-8" />
-        <meta http-equiv="refresh" content="0; url=/projects/fullstack/ticketing-system/" />
-        <script>window.location.href = "/projects/fullstack/ticketing-system/";</script>
-    </head>
-    <body>
-        <p>This page has moved. If you are not redirected, <a href="/projects/fullstack/ticketing-system/">click here</a>.</p>
-    </body>
-</html>
-```
-
----
-
 ## LOW PRIORITY
 
-### 17. Optimize Images for Performance
+### 16. Optimize Images for Performance
 
 **Directory**: `assets/images/`
 
@@ -868,7 +837,7 @@ To prevent broken bookmarks and external links, create simple redirect pages at 
 
 ---
 
-### 18. Verify Mobile Responsiveness
+### 17. Verify Mobile Responsiveness
 
 **Actions**:
 1. Test site on multiple screen sizes:
@@ -886,7 +855,7 @@ To prevent broken bookmarks and external links, create simple redirect pages at 
 
 ---
 
-### 19. Add Dark Mode Toggle
+### 18. Add Dark Mode Toggle
 
 **Files**: `assets/css/main.css`, `index.html`, `about/index.html`, `assets/js/main.js`
 
@@ -975,7 +944,7 @@ themeToggle?.addEventListener('click', function() {
 
 ## LOWEST PRIORITY
 
-### 20. Add SEO Meta Tags and Structured Data
+### 19. Add SEO Meta Tags and Structured Data
 
 **Files**: All HTML pages (`index.html`, `about/index.html`, all case study pages)
 
@@ -1033,7 +1002,7 @@ Add to homepage `<head>`:
 
 ---
 
-### 21. Create Custom 404 Page
+### 20. Create Custom 404 Page
 
 **File**: `/404.html`
 
@@ -1096,7 +1065,7 @@ GitHub Pages automatically serves `404.html` for missing pages. Create a helpful
 
 ---
 
-### 22. Verify GitHub Pages Configuration
+### 21. Verify GitHub Pages Configuration
 
 **Actions**:
 1. Confirm repository settings point to correct branch (usually `main` or `gh-pages`)
@@ -1121,9 +1090,8 @@ GitHub Pages automatically serves `404.html` for missing pages. Create a helpful
 6. **GitHub Pages deployment**: After making changes, commit and push to trigger GitHub Pages rebuild
 7. **Path consistency**: All internal links should use trailing slashes for directories (e.g., `/projects/automation/` not `/projects/automation`)
 8. **Asset paths**: Remember that case study pages in subdirectories need `../../` to reach root-level assets
-9. **Redirects are temporary**: Old redirect pages (Task 16) can be removed after a few months once external links update
-10. **SEO is ongoing**: Task #20 provides baseline SEO; continue adding meta descriptions as new projects are created
-11. **Priority order**: Complete HIGH PRIORITY tasks first (1-6), then MEDIUM (7-16), then LOW (17-19), then LOWEST (20-22)
+9. **SEO is ongoing**: Task #19 provides baseline SEO; continue adding meta descriptions as new projects are created
+10. **Priority order**: Complete HIGH PRIORITY tasks first (1-6), then MEDIUM (7-15), then LOW (16-18), then LOWEST (19-21)
 
 ---
 
@@ -1141,12 +1109,16 @@ GitHub Pages automatically serves `404.html` for missing pages. Create a helpful
 | 8. Nav Dropdown HTML | ✅ Complete | Category-based dropdown with nested active project display |
 | 9. Nav Dropdown CSS | ✅ Complete | Z-index fix, overflow visible, submenu styles added |
 | 10. Case Study Migration | ✅ Complete | 5 existing case studies migrated |
-| 11. Category Landing Pages | ❌ Not Started | Need 5 category index.html files |
+| 11. Category Landing Pages | ✅ Complete | Created 4 category pages (automation, analysis, visualization, fullstack) with JS-driven rendering from projects.json. Impact indicators added to all cards. Homepage converted to data-driven rendering with featured project + top grid projects controlled by homepageOrder field. |
 | 12. Homepage Links | ✅ Complete | Updated to new directory paths |
 | 13. About Page Migration | ✅ Complete | Moved to `/about/index.html` |
-| 14. Projects Overview Content | ❌ Not Started | Need `/projects/index.html` content |
+| 14. Projects Overview Content | ✅ Complete | Created `/projects/index.html` with dynamic category cards loaded from `projects.json`. Intro text hardcoded on page; categories rendered with description, project count, and link to category landing page. |
 | 15. Missing Case Studies | ❌ Not Started | 4 new case study pages needed |
-| 16. URL Redirects | ❌ Not Started | Old flat-file URLs will break |
-| 17-22. Low/Lowest Priority | ❌ Not Started | Image optimization, mobile, dark mode, SEO, 404, GitHub config |
+| 16. Image Optimization | ❌ Not Started | Compress images, add lazy loading |
+| 17. Mobile Responsiveness | ❌ Not Started | Test and fix across breakpoints |
+| 18. Dark Mode Toggle | ❌ Not Started | Add theme toggle with CSS custom properties |
+| 19. SEO Meta Tags | ❌ Not Started | Add meta descriptions, Open Graph tags, structured data |
+| 20. Custom 404 Page | ❌ Not Started | Create helpful error page at `/404.html` |
+| 21. GitHub Pages Config | ❌ Not Started | Verify deployment settings and navigation |
 
-**Core structural migration is ~60% complete.** The site has the correct directory structure, migrated case studies, updated homepage links, and fully functional dropdown navigation with category-based organization. Next priority: category landing pages and projects overview content.
+**Core structural migration is ~65% complete.** The site has the correct directory structure, migrated case studies, updated homepage links, fully functional dropdown navigation with category-based organization, and a projects overview page that dynamically renders all categories. Next priority: missing case study pages and URL redirects.

@@ -232,6 +232,33 @@ async function loadCategoryProjects() {
     }
 }
 
+// Load categories overview from centralized data file
+async function loadCategoriesOverview() {
+    const container = document.getElementById('categories-container');
+    if (!container) return;
+
+    try {
+        const response = await fetch('/assets/data/projects.json');
+        if (!response.ok) throw new Error('Failed to load projects data');
+        const data = await response.json();
+
+        container.innerHTML = Object.entries(data.categories).map(([key, category]) => `
+            <article>
+                <header>
+                    <h2>${category.title}</h2>
+                </header>
+                <p>${category.description}</p>
+                <p><strong>${category.projects.length} project${category.projects.length !== 1 ? 's' : ''}</strong></p>
+                <ul class="actions special">
+                    <li><a href="${key}/" class="button">View ${category.title} Projects</a></li>
+                </ul>
+            </article>
+        `).join('');
+    } catch (error) {
+        console.error('Error loading categories overview:', error);
+    }
+}
+
 // Initialize components when DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
     loadComponent('header-placeholder', '/assets/html/header.html');
@@ -240,4 +267,5 @@ document.addEventListener('DOMContentLoaded', function() {
     loadComponent('footer-placeholder', '/assets/html/footer.html');
     loadCategoryProjects();
     loadHomepageProjects();
+    loadCategoriesOverview();
 });
