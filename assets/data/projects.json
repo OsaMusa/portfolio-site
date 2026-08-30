@@ -8,37 +8,41 @@
                     "slug": "mass-appraisal-tool",
                     "title": "Mass Appraisal Tool",
                     "image": "mass-appraisal-tool-pic.jpg",
-                    "impact": "Valuated 500+ properties per cycle with 92% accuracy rate, supporting 200+ appeal cases annually.",
+                    "impact": "Enabled a single consultant to evaluate 1,000+ properties simultaneously, automatically highlighting valuation differences to prioritize high-value appeal cases.",
                     "description": "A tool using the company's chosen methodologies to valuate properties against an assessor's proposed value.",
                     "homepage": true,
-                    "homepageOrder": 3
+                    "homepageOrder": 3,
+                    "status": "completed"
                 },
                 {
                     "slug": "report-generator",
                     "title": "Report Generator",
                     "image": "report-generator-pic.jpg",
-                    "impact": "Automated 15+ hours of manual reporting per week across 20 reports, eliminating copy-paste errors.",
+                    "impact": "Cut evidence report generation time from 1.5 hours to 45 seconds, simplifying training for new consultants.",
                     "description": "A macro that transfers data (text, images, charts, etc.) from an Excel workbook to a Word document.",
                     "homepage": true,
-                    "homepageOrder": 4
+                    "homepageOrder": 4,
+                    "status": "completed"
                 },
                 {
                     "slug": "outlook-automation",
                     "title": "Outlook Automation",
                     "image": "outlook-automation-pic.jpg",
-                    "impact": "Saved 10+ hours weekly by automating calendar updates for 15 consultants handling appeal hearings.",
+                    "impact": "Eliminated a manual scheduling task that consumed 20+ hours per week per assistant, updating hearing calendars for all US consultants in under 3 minutes.",
                     "description": "A flow that updates consultant Outlook calendars to show upcoming appeal hearings.",
                     "homepage": false,
-                    "homepageOrder": null
+                    "homepageOrder": null,
+                    "status": "completed"
                 },
                 {
                     "slug": "appeal-form-automations",
                     "title": "Appeal Form Automations",
                     "image": "appeal-form-automations-pic.jpg",
-                    "impact": "Processed 300+ forms automatically, reducing manual entry time by 75% and eliminating data entry errors.",
+                    "impact": "Processed 300+ forms automatically, reducing a 3-day manual process to under 3 minutes and enabling a single team member to complete the work.",
                     "description": "A set of automations made for filling out large numbers of appeal forms specific to the assessor and appeal type.",
                     "homepage": false,
-                    "homepageOrder": null
+                    "homepageOrder": null,
+                    "status": "completed"
                 }
             ]
         },
@@ -50,10 +54,11 @@
                     "slug": "housing-prices",
                     "title": "US Average Housing Prices by ZIP",
                     "image": "us-property-values-pic-FEATURED.jpg",
-                    "impact": "Visualizes housing data for 40,000+ ZIP codes across 20+ years of Zillow data. Updated monthly with fresh datasets.",
-                    "description": "A site with visualizations that show the average home values across the US by zip code since January, 2000. All data is provided by Zillow Group, and is updated monthly. Visit the site and see how the values in the areas that interest you have changed. For a look into the code behind it, you can visit my Github repository by clicking the button below.",
+                    "impact": "Visualized housing data for 40,000+ ZIP codes across 20+ years of Zillow data, with data through February 2024.",
+                    "description": "A site with visualizations that showed the average home values across the US by zip code since January 2000. All data was provided by Zillow Group. Visit the site and see how the values in the areas that interest you had changed. For a look into the code behind it, you could visit my Github repository by clicking the button below.",
                     "homepage": true,
-                    "homepageOrder": 1
+                    "homepageOrder": 1,
+                    "status": "completed"
                 }
             ]
         },
@@ -65,10 +70,11 @@
                     "slug": "ticketing-system",
                     "title": "Ticketing System",
                     "image": "ticketing-system-pic.jpg",
-                    "impact": "Tracked 50+ issues monthly, reduced resolution time by 30%, automated status notifications to reporters.",
+                    "impact": "Centralized request tracking for 10+ weekly submissions, enabling process visualization and prioritization while automating status notifications. The system's effectiveness led to adoption by another department.",
                     "description": "A system built to track reported issues, who they're assigned to, and send status updates to issue reporters.",
                     "homepage": true,
-                    "homepageOrder": 2
+                    "homepageOrder": 2,
+                    "status": "completed"
                 }
             ]
         }

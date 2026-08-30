@@ -1,0 +1,9 @@
+{
+  "$schema": "https://app.kilo.ai/config.json",
+  "default_agent": "project-documenter",
+  "agent": {
+    "project-documenter": {
+      "model": "kilo/qwen/qwen3.7-plus"
+    }
+  }
+}

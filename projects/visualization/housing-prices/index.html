@@ -33,42 +33,42 @@
 					<h2>Problem</h2>
 					<p>In the United States, housing has become increasingly expensive. Understanding how home values have changed over time is critical for buyers, sellers, investors, and policymakers.</p>
 					
-					<p>The idea for this project came from a real estate investor I knew who was familiar with someone who had created a heatmap of property values for the DFW area. I wanted to see if I could build something similar, but at a national scale—covering the entire United States rather than just one metroplex.</p>
+					<p>The idea for this project came from a real estate investor I knew who was familiar with someone who had created a heatmap of property values for the DFW area. I wanted to see if I could build something similar, but at a national scale, covering the entire United States rather than just one metroplex.</p>
 					
-					<p>While Zillow provides extensive data on home values through their ZHVI (Zillow Home Value Index) dataset, the raw data is not easily accessible or visualizable for the average user. There was a need for an interactive tool that could help people explore and understand housing value trends across the country at a granular level—down to individual ZIP codes—over more than two decades of data.</p>
+					<p>While Zillow provides extensive data on home values through their ZHVI (Zillow Home Value Index) dataset, the raw data is not easily accessible or visualizable for the average user. There was a need for an interactive tool that could help people explore and understand housing value trends across the country at a granular level, down to individual ZIP codes, over more than two decades of data.</p>
 					
 					<h2>Solution</h2>
-					<p>I built a multi-page Streamlit web application that transforms Zillow's ZHVI dataset into an interactive visualization experience. The application features:</p>
+					<p>I built a multi-page Streamlit web application that transformed Zillow's ZHVI dataset into an interactive visualization experience. The application featured:</p>
 					
-					<p><strong>Hierarchical Filtering System</strong>: Users can drill down from State → Metro Area → County → City → specific ZIP codes. The filters are synchronized across all pages using Streamlit's session state, so selections persist as users navigate between visualizations.</p>
+					<p><strong>Hierarchical Filtering System</strong>: Users could drill down from State → Metro Area → County → City → specific ZIP codes. The filters were synchronized across all pages using Streamlit's session state, so selections persisted as users navigated between visualizations.</p>
 					
-					<p><strong>Heat Map Visualization</strong>: Displays property values geographically using pydeck and GeoJSON data. Users can toggle between 2D and 3D views, with colors representing value ranges (red-to-yellow gradient). The map highlights the lowest, median, and highest valued ZIP codes in the selected area.</p>
+					<p><strong>Heat Map Visualization</strong>: Displayed property values geographically using pydeck and GeoJSON data. Users could toggle between 2D and 3D views, with colors representing value ranges (red-to-yellow gradient). The map highlighted the lowest, median, and highest valued ZIP codes in the selected area.</p>
 					
-					<p><strong>Historic Value Trends</strong>: Shows time-series line charts of home value changes with configurable timeframes (3 years, 5 years, 10 years, or maximum since 2000). Users can compare multiple ZIP codes simultaneously.</p>
+					<p><strong>Historic Value Trends</strong>: Showed time-series line charts of home value changes with configurable timeframes (3 years, 5 years, 10 years, or maximum since 2000). Users could compare multiple ZIP codes simultaneously.</p>
 					
-					<p><strong>Data Pipeline</strong>: Created a data preparation script that processes the raw Zillow CSV data, fills missing months through interpolation, enriches city names using postal code lookups, and serializes everything into an efficient format for fast loading. The entire dataset is cached with a 12-hour TTL to optimize performance.</p>
+					<p><strong>Data Pipeline</strong>: Created a data preparation script that processed the raw Zillow CSV data, filled missing months through interpolation, enriched city names using postal code lookups, and serialized everything into an efficient format for fast loading. The entire dataset was cached with a 12-hour TTL to optimize performance.</p>
 					
 					<h2>Challenges</h2>
-					<p><strong>Data Storage Optimization</strong>: The dataset is massive—40,000+ ZIP codes with 20+ years of monthly data. Initially, I tried using Python's pickle format for serialization, but the file sizes were still too large for efficient loading. I researched alternative formats and learned about Apache Feather, which provided much better compression and faster read times. This required understanding the tradeoffs between different serialization formats and implementing the conversion pipeline.</p>
+					<p><strong>Data Storage Optimization</strong>: The dataset was massive: 40,000+ ZIP codes with 20+ years of monthly data. Initially, I tried using Python's pickle format for serialization, but the file sizes were still too large for efficient loading. I researched alternative formats and learned about Apache Feather, which provided much better compression and faster read times. This required understanding the tradeoffs between different serialization formats and implementing the conversion pipeline.</p>
 					
-					<p><strong>Advanced Visualizations</strong>: While pydeck provides a Python wrapper for deck.gl (a JavaScript library for geospatial visualizations), getting the exact results I wanted required understanding how the underlying JavaScript library worked. I had to learn about GeoJSON layers, elevation scaling for 3D views, and color mapping to achieve the heatmap effect. This meant going beyond the Python documentation and diving into the deck.gl documentation to understand the capabilities and limitations of the visualization engine.</p>
+					<p><strong>Advanced Visualizations</strong>: While pydeck provided a Python wrapper for deck.gl (a JavaScript library for geospatial visualizations), getting the exact results I wanted required understanding how the underlying JavaScript library worked. I had to learn about GeoJSON layers, elevation scaling for 3D views, and color mapping to achieve the heatmap effect. This meant going beyond the Python documentation and diving into the deck.gl documentation to understand the capabilities and limitations of the visualization engine.</p>
 					
-					<p><strong>Deployment Constraints</strong>: The application is hosted on Streamlit Community Cloud, which has a significant limitation: the app goes to sleep after a period of inactivity. When a visitor arrives at a sleeping app, they're shown a wake-up page and must click a button to start the application. This creates a less-than-ideal first impression, but it's a tradeoff of using free hosting for a data-intensive application.</p>
+					<p><strong>Deployment Constraints</strong>: The application was hosted on Streamlit Community Cloud, which had a significant limitation: the app went to sleep after a period of inactivity. When a visitor arrived at a sleeping app, they were shown a wake-up page and had to click a button to start the application. This created a less-than-ideal first impression, but it was a tradeoff of using free hosting for a data-intensive application.</p>
 					
-					<p><strong>Data Update Limitations</strong>: Due to Zillow's Terms of Service, the data cannot be automatically scraped or gathered programmatically. This means the dataset must be manually downloaded and processed, so the application currently displays data through February 2024 rather than being updated monthly as originally intended.</p>
+					<p><strong>Data Update Limitations</strong>: Due to Zillow's Terms of Service, the data could not be automatically scraped or gathered programmatically. The dataset had to be manually downloaded and processed, so the application displayed data through February 2024.</p>
 					
 					<h2>Result</h2>
-					<p>The application visualizes housing data for 40,000+ ZIP codes across 20+ years of Zillow data (January 2000 to February 2024). It's deployed on Streamlit Community Cloud, making it freely accessible to anyone interested in exploring housing market trends. The interactive nature allows users to quickly identify value patterns in areas they're interested in, from broad metro-level trends down to specific neighborhoods.</p>
+					<p>The application visualized housing data for 40,000+ ZIP codes across 20+ years of Zillow data (January 2000 to February 2024). It was deployed on Streamlit Community Cloud, making it freely accessible to anyone interested in exploring housing market trends. The interactive nature allowed users to quickly identify value patterns in areas they were interested in, from broad metro-level trends down to specific neighborhoods.</p>
 					
 					<h2>Technologies Used</h2>
 					<ul>
-						<li>Streamlit — Web application framework</li>
-						<li>pandas — Data manipulation and analysis</li>
-						<li>geopandas — Geographic data processing</li>
-						<li>pydeck / deck.gl — Map visualizations (2D/3D heat maps)</li>
-						<li>Apache Feather / pyarrow — Efficient data storage and serialization</li>
-						<li>pgeocode — Postal code geolocation lookups</li>
-						<li>Zillow ZHVI Data — Source dataset (through February 2024)</li>
+						<li>Streamlit</li>
+						<li>pandas</li>
+						<li>geopandas</li>
+						<li>pydeck / deck.gl</li>
+						<li>Apache Feather / pyarrow</li>
+						<li>pgeocode</li>
+						<li>Zillow ZHVI Data</li>
 					</ul>
 
 					<!-- Project Buttons -->

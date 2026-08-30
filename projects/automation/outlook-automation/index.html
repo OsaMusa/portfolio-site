@@ -4,7 +4,6 @@
 		<title>Outlook Automation - Osa Musa</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<meta name="project-proprietary" content="true">
 		<link rel="stylesheet" href="../../../assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="../../../assets/css/noscript.css" /></noscript>
 	</head>
@@ -45,14 +44,14 @@
 					<h2>Challenges</h2>
 					<p><strong>Appointment Tracking</strong>: I realized that without recording the global appointment IDs, there would be no way to find an existing appointment and make any necessary updates that existed in the schedule. When meetings were rescheduled, there would be a duplicate appointment at the new time otherwise. This led me to implement the ID tracking system to enable proper updates.</p>
 					
-					<p><strong>Dedicated Outlook Account</strong>: There needed to be a new Outlook account with its own email address that the operations team needed to access in order for this to work the way it did. The reason was because this was creating and sending actual Outlook meeting invites like how the assistants did. This also meant I didn't need to worry about API delays due to it being automatically handled on a computer.</p>
+					<p><strong>Dedicated Outlook Account</strong>: There needed to be a new Outlook account with its own email address that the operations team needed to access in order for this to work the way it did. The reason was that this was creating and sending actual Outlook meeting invites like how the assistants did. This also meant I didn't need to worry about API delays due to it being automatically handled on a computer.</p>
 					
 					<p><strong>Integration with Existing Workflows</strong>: Having it done as described above is also why Alteryx was used. It allowed for a single employee who was already doing a daily refresh task to simply run the automation in the morning to update the schedules for all US consultants in under 3 minutes and go on with the rest of their tasks for the day.</p>
 					
 					<h2>Result</h2>
 					<p>The consultants were able to more easily get a clear picture of when they had hearings and better avoid missing them. The operations team was no longer spending time entering hearings into the consultants' personal calendars and could focus on other tasks.</p>
 					
-					<p>The VP of Operations and several of the local assistants informed me that the automation ultimately eliminated that task for the department and allowed for them to focus on more important items. The assistants would spend at least 20 hours per week each on just preparing consultant schedules with hearings.</p>
+					<p>The VP of Operations and several of the local assistants informed me that the automation ultimately eliminated that task for the department and allowed for them to focus on more important items. The assistants would spend at least 20 hours per week each on just preparing consultant schedules with hearings. The automation replaced that entire process with a single employee updating the schedules for all US consultants in under 3 minutes.</p>
 					
 					<p>They and management were given access to the calendar of the account sending the meeting invites, allowing them to have complete oversight of the hearings and be able to see when changes should be made.</p>
 					
