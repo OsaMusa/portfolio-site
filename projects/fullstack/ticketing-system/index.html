@@ -4,6 +4,7 @@
 		<title>Ticketing System - Osa Musa</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="project-proprietary" content="true">
 		<link rel="stylesheet" href="../../../assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="../../../assets/css/noscript.css" /></noscript>
 	</head>
@@ -29,20 +30,30 @@
 					</header>
 					
 					<h2>Problem</h2>
-					<p>The company had a small technology team that would be sent a variety of requests from the rest of the teams nationwide. These requests would
-					vary from quick tasks from the consulting team to large projects from the operations team. With the large demand on such a small team, there
-					would be requests that could not be addressed as there was no standard for submissions. The team needed a way to keep track of what requests
-					were coming in as well as who the projects would be assigned to.</p>
+					<p>The company had a small technology team of 3 people (a manager and two business analysts) that would receive a constant influx of requests from teams nationwide. These requests came through multiple channels—Microsoft Teams direct messages, direct emails, or being brought to us by our manager after going through multiple people.</p>
+					
+					<p>This fragmented approach caused requests to get lost in transit, context to be lost, and some projects to simply not be known about since there wasn't a standard for tracking them. The team needed a centralized way to keep track of what requests were coming in, who they were assigned to, and their current status.</p>
 					
 					<h2>Solution</h2>
-					<p>Utilized Microsoft Forms and Power Automate to create a ticketing system for the technology team that would automatically add requests
-					submitted via the associated forms to the team's SharePoint List for tracking. Additional Power Automate flows were created to email status
-					updates regarding the requests to the people who submitted them. A Power BI report was also made to visualize the number of projects and
-					upcoming deadlines for the team's management staff.</p>
+					<p>I utilized Microsoft Forms and Power Automate to create a ticketing system for the technology team that would automatically add requests submitted via the associated forms to the team's SharePoint List for tracking.</p>
+					
+					<p>Additional Power Automate flows were created to email status updates regarding the requests to the people who submitted them. A Power BI report was also made to visualize the number of projects and upcoming deadlines for the team's management staff.</p>
+					
+					<p>To ensure adoption, I created Teams automations for my team members that used keywords to automatically notify senders that official requests would need to be submitted via the new forms.</p>
+					
+					<h2>Challenges</h2>
+					<p><strong>Power Automate Expressions</strong>: I had to learn how to use Power Automate expressions in order to format and calculate the data in a way that would be usable to the team while also sharing the necessary information in the Power BI dashboard.</p>
+					
+					<p><strong>Interactive Calendar Matrix</strong>: I had to create an interactive calendar matrix in Power BI for one of the dashboards using DAX expressions, which required learning advanced Power BI techniques.</p>
+					
+					<p><strong>User Adoption</strong>: In order to ensure that the request form was actually being used, I had to create Teams automations for my team members that used keywords to automatically notify the senders that official requests would need to be submitted via the new forms.</p>
+					
+					<p><strong>Transparency and Expectation Management</strong>: The dashboard aspect was made for the sake of transparency and to control expectations. With a dashboard making our project list easily visible to upper management, it was easier for us to keep them aware of our capacity and what we could realistically take on.</p>
 					
 					<h2>Result</h2>
-					<p>The team is now able to see what projects are being submitted and properly prioritize them in accordance with their capacity. Managers
-					have a clearer picture of what each team member's project list looks like and can accept/reject requests accordingly.</p>
+					<p>Through this system, our team was able to start tracking how many requests were actually coming in, visualize what stage of the process they were in, and prioritize them while knowing who needed to be informed of what. This was useful for us as well as upper management, who were then able to use the dashboard to immediately have insight on the sometimes 10 new requests in a week.</p>
+					
+					<p>The system became recognized as so effective that another department manager placed a request to have one be made for their department in order to keep track of their assignments.</p>
 					
 					<h2>Technologies Used</h2>
 					<ul>
@@ -50,6 +61,7 @@
 						<li>Power Automate</li>
 						<li>SharePoint</li>
 						<li>Power BI</li>
+						<li>Microsoft Teams</li>
 					</ul>
 					
 					<!-- Project Buttons -->

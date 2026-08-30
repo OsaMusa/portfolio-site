@@ -1,9 +1,10 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Mass Appraisal Tool</title>
+		<title>Mass Appraisal Tool - Osa Musa</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="project-proprietary" content="true">
 		<link rel="stylesheet" href="../../../assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="../../../assets/css/noscript.css" /></noscript>
 	</head>
@@ -27,28 +28,39 @@
 						<h1>Mass Appraisal Tool</h1>
 						<p style="text-align: center; font-size: x-large;"><b>Project for: </b>Altus Group</p>
 					</header>
-					<p>
-						<h3>Problem</h3>
-						The company's consultants conduct appraisals of properties in Excel and compare their results to those of an assessor to judge whether an
-						appeal should be filed. The operations team would update property information within the company database which allowed for consultants to
-						export their list of assigned properties. With the company's growing client base, appraising all a consultant's assigned properties becomes
-						a more time-consuming process, especially for consultants servicing clients with several dozen properties each. They were not able to manage
-						the growing number of properties they were being assigned to, and needed a way to appraise their properties that would allow individuals to
-						quickly assess whether they had a case for any appeals.
-						<br><br>
-						<h3>Solution</h3>
-						Because the consultants were all more familiar with using Excel for their valuations, and had them based on exports from the database, an
-						Excel workbook was made that would look at all the properties in those exports. It primarily utilized a table with a multitude of calculated
-						columns. This table would use the company's different valuation formulas to automatically calculate the value of each property as well as
-						highlight when a property's value based on those methods was less than what was proposed by the assessor. It also allowed for any necessary
-						changes to be made in what ways specific properties were being evaluated. The workbook also had other sheets meant for the more detailed
-						phases of the evaluations available for when the consultant chose a property to appeal.
-						<br><br>
-						<h3>Result</h3>
-						The tool led to an increase in productivity as the consultants were able to evaluate a high volume of properties at once utilizing it. The
-						table prevented them from wasting precious time appraising properties that would have little to no value reductions by immediately showing
-						them the results of their valuation methodology; thus, allowing them to focus on high value properties.
-					</p>
+					<h2>Problem</h2>
+					<p>The company's consultants conduct appraisals of properties in Excel and compare their results to those of an assessor to judge whether an appeal should be filed. The operations team would update property information within the company database which allowed for consultants to export their list of assigned properties.</p>
+					
+					<p>The company had just acquired a large client, and the consultants were in a panic about not having enough staff to fulfill the work. I was brought on to assist by creating a tool that could allow a single consultant to appraise hundreds to thousands of properties with relative ease.</p>
+					
+					<p>With the company's growing client base, appraising all a consultant's assigned properties was becoming a more time-consuming process, especially for consultants servicing clients with several dozen properties each. They were not able to manage the growing number of properties they were being assigned to, and needed a way to appraise their properties that would allow individuals to quickly assess whether they had a case for any appeals.</p>
+					
+					<h2>Solution</h2>
+					<p>Because the consultants were all more familiar with using Excel for their valuations, and had them based on exports from the database, an Excel workbook was made that would look at all the properties in those exports.</p>
+					
+					<p>It primarily utilized a table with a multitude of calculated columns. This table would use the company's different valuation formulas to automatically calculate the value of each property as well as highlight when a property's value based on those methods was less than what was proposed by the assessor. It also allowed for any necessary changes to be made in what ways specific properties were being evaluated.</p>
+					
+					<p>The workbook also had other sheets meant for the more detailed phases of the evaluations available for when the consultant chose a property to appeal.</p>
+					
+					<h2>Challenges</h2>
+					<p><strong>Complex Valuation Formulas</strong>: I had to create extremely complex Excel formulas to implement the evaluation methods the company had developed. These formulas needed to handle not just individual properties, but also multi-parcel properties, all while being performant enough to calculate values for thousands of properties at once.</p>
+					
+					<p><strong>Data Extraction Performance</strong>: The property data was stored in Snowflake, migrated from a legacy offline database. The raw data table contained over 1 million records, as it held the historical data for all clients across the company's 15 years of operation. Initially, I used Power Query to extract the data, but this caused a 20+ minute wait time. The director who was my liaison to the consultants said that was far better than the manual process, but I felt that was inexcusable for an automation. I had to learn Power Query M Language to utilize SQL for transforming the data directly during the query. This optimization reduced the extraction time from 20+ minutes to 10-15 seconds. It also allowed me to add a filtering section to the spreadsheet, enabling consultants to specify exactly what data would be extracted from Snowflake before the query ran.</p>
+					
+					<p><strong>User Adoption</strong>: Once I had a working model, we began beta testing with a group of consultants to see not only how they liked it, but also how we could improve the ease of adoption. Thanks to it being built in Excel, it did not take much effort for them to learn how to use the tool. The beta testing was successful, and the tool became widely adopted across the company, ultimately being made a company standard for property appraisals.</p>
+					
+					<h2>Result</h2>
+					<p>The tool allowed a single consultant at any level—even new junior consultants—to work on over 1,000 properties simultaneously. By automatically calculating and highlighting the differences in valuations between the company's methods and the assessor's numbers, it made finding the properties with the strongest cases fast and easy. The tool also displayed the percent difference between valuations, giving consultants immediate insight into which properties warranted further investigation.</p>
+					
+					<p>This led to a significant increase in productivity, as consultants were able to evaluate a high volume of properties at once. The automated calculations prevented them from wasting time appraising properties that would have little to no value reductions, allowing them to focus on high-value properties with strong appeal cases.</p>
+					
+					<h2>Technologies Used</h2>
+					<ul>
+						<li>Excel</li>
+						<li>Power Query (M Language)</li>
+						<li>SQL</li>
+						<li>Snowflake</li>
+					</ul>
 					
 					<!-- Project Buttons -->
 					<div id="prj-btns-placeholder"></div>

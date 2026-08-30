@@ -42,30 +42,6 @@
                 }
             ]
         },
-        "analysis": {
-            "title": "Analysis",
-            "description": "These projects demonstrate analytical thinking through exploratory data analysis, statistical methods, and database-driven insights. Each project answers real-world questions or enables deeper understanding of complex datasets.",
-            "projects": [
-                {
-                    "slug": "sales-analysis",
-                    "title": "Sales Data Analysis",
-                    "image": "sales-data-analysis-pic.jpg",
-                    "impact": "Analyzed 12 months of sales data to identify trends, answer business questions, and inform strategy decisions.",
-                    "description": "An exploratory data analysis on a year of sales data used to answer business related questions.",
-                    "homepage": true,
-                    "homepageOrder": 5
-                },
-                {
-                    "slug": "ror2-parser",
-                    "title": "ROR 2 Run Report Parser",
-                    "image": "ror2-run-report-db.jpg",
-                    "impact": "Parses and stores run data from 100+ games, enabling trend analysis and performance tracking.",
-                    "description": "An xml parser that reads Risk of Rain 2 saved run reports and updates the associated relational database.",
-                    "homepage": false,
-                    "homepageOrder": null
-                }
-            ]
-        },
         "visualization": {
             "title": "Visualization",
             "description": "These projects transform raw data into interactive visual experiences. From geographic heatmaps to time-series dashboards, each visualization makes complex datasets accessible and actionable.",
@@ -78,15 +54,6 @@
                     "description": "A site with visualizations that show the average home values across the US by zip code since January, 2000. All data is provided by Zillow Group, and is updated monthly. Visit the site and see how the values in the areas that interest you have changed. For a look into the code behind it, you can visit my Github repository by clicking the button below.",
                     "homepage": true,
                     "homepageOrder": 1
-                },
-                {
-                    "slug": "texas-property-values",
-                    "title": "Texas Property Values",
-                    "image": "texas-property-values-pic.jpg",
-                    "impact": "Interactive heatmap covering 254 Texas counties, visualizing 5+ years of property value trends.",
-                    "description": "A heatmap showing the average property value of houses in Texas by county from January, 2015 - June, 2020.",
-                    "homepage": false,
-                    "homepageOrder": null
                 }
             ]
         },

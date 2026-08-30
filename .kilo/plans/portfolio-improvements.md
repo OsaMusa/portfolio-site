@@ -804,12 +804,21 @@ Create a comprehensive overview page that:
 
 ### 15. Create Missing Case Study Pages
 
-The following projects on the homepage don't have detailed case study pages yet:
+**Original scope**: 4 missing case study pages
 
-- **Sales Data Analysis** → `/projects/analysis/sales-analysis/index.html`
-- **Texas Property Values** → `/projects/visualization/texas-property-values/index.html`
-- **ROR 2 Run Report Parser** → `/projects/analysis/ror2-parser/index.html`
+**Decision**: After review, 3 projects were removed from the portfolio:
+- ~~**Sales Data Analysis**~~ — Removed (practice project from early learning phase, basic EDA)
+- ~~**Texas Property Values**~~ — Removed (similar scope to Housing Prices, redundant)
+- ~~**ROR 2 Run Report Parser**~~ — Removed (personal project, not relevant to professional portfolio)
+
+**Remaining**: 1 case study to create
 - **US Housing Prices by ZIP** → `/projects/visualization/housing-prices/index.html`
+
+**Additional cleanup completed**:
+- Removed "Analysis" category from `projects.json` (now empty)
+- Removed "Analysis" link from navigation dropdown
+- Deleted `/projects/analysis/` directory
+- Orphaned project images were already deleted
 
 Use the same template as existing case studies, including:
 - Problem statement
@@ -1109,11 +1118,11 @@ GitHub Pages automatically serves `404.html` for missing pages. Create a helpful
 | 8. Nav Dropdown HTML | ✅ Complete | Category-based dropdown with nested active project display |
 | 9. Nav Dropdown CSS | ✅ Complete | Z-index fix, overflow visible, submenu styles added |
 | 10. Case Study Migration | ✅ Complete | 5 existing case studies migrated |
-| 11. Category Landing Pages | ✅ Complete | Created 4 category pages (automation, analysis, visualization, fullstack) with JS-driven rendering from projects.json. Impact indicators added to all cards. Homepage converted to data-driven rendering with featured project + top grid projects controlled by homepageOrder field. |
+| 11. Category Landing Pages | ✅ Complete | Created 3 category pages (automation, visualization, fullstack) with JS-driven rendering from projects.json. Impact indicators added to all cards. Homepage converted to data-driven rendering with featured project + top grid projects controlled by homepageOrder field. Analysis category removed (empty after project cleanup). |
 | 12. Homepage Links | ✅ Complete | Updated to new directory paths |
 | 13. About Page Migration | ✅ Complete | Moved to `/about/index.html` |
 | 14. Projects Overview Content | ✅ Complete | Created `/projects/index.html` with dynamic category cards loaded from `projects.json`. Intro text hardcoded on page; categories rendered with description, project count, and link to category landing page. |
-| 15. Missing Case Studies | ❌ Not Started | 4 new case study pages needed |
+| 15. Missing Case Studies | ✅ Complete | 3 projects removed (not portfolio-worthy); case study created for US Housing Prices by ZIP |
 | 16. Image Optimization | ❌ Not Started | Compress images, add lazy loading |
 | 17. Mobile Responsiveness | ❌ Not Started | Test and fix across breakpoints |
 | 18. Dark Mode Toggle | ❌ Not Started | Add theme toggle with CSS custom properties |
@@ -1121,4 +1130,4 @@ GitHub Pages automatically serves `404.html` for missing pages. Create a helpful
 | 20. Custom 404 Page | ❌ Not Started | Create helpful error page at `/404.html` |
 | 21. GitHub Pages Config | ❌ Not Started | Verify deployment settings and navigation |
 
-**Core structural migration is ~65% complete.** The site has the correct directory structure, migrated case studies, updated homepage links, fully functional dropdown navigation with category-based organization, and a projects overview page that dynamically renders all categories. Next priority: missing case study pages and URL redirects.
+**Core structural migration is ~75% complete.** The site has the correct directory structure, migrated case studies, updated homepage links, fully functional dropdown navigation with category-based organization, and a projects overview page that dynamically renders all categories. Portfolio trimmed from 9 to 6 projects after assessment. All case studies complete. Next priorities: image optimization, mobile responsiveness testing, and dark mode toggle.
