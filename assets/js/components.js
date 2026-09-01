@@ -8,6 +8,7 @@ async function loadComponent(id, url) {
         
         // If loading nav, set active state
         if (id === 'nav-placeholder') {
+            await populateNavDropdown();
             setActiveNavLink();
 
             // Re-populate mobile nav panel since main.js captured empty $nav at init
@@ -23,6 +24,26 @@ async function loadComponent(id, url) {
         }
     } catch (error) {
         console.error(error);
+    }
+}
+
+// Populate nav dropdown from centralized data file
+async function populateNavDropdown() {
+    const dropdown = document.querySelector('#nav .dropdown-menu');
+    if (!dropdown) return;
+
+    try {
+        const response = await fetch('/assets/data/projects.json');
+        if (!response.ok) throw new Error('Failed to load projects data');
+        const data = await response.json();
+
+        dropdown.innerHTML = Object.entries(data.categories)
+            .map(([key, category]) =>
+                `<li><a href="/projects/${key}/">${category.title}</a></li>`
+            )
+            .join('');
+    } catch (error) {
+        console.error('Error populating nav dropdown:', error);
     }
 }
 
