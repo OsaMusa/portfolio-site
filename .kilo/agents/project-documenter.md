@@ -5,7 +5,7 @@ options:
   displayName: Project Documenter
 permission:
   read: allow
-  edddit:
+  edit:
     "*": deny
     "projects/**/**/index.html": allow
     "assets/data/projects.json": allow
