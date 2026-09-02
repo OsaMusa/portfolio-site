@@ -846,7 +846,9 @@ Use the same template as existing case studies, including:
 
 ---
 
-### 17. Verify Mobile Responsiveness
+### 17. Verify Mobile Responsiveness ✅ COMPLETE
+
+**Status**: Tested across breakpoints (320px, 375px, 768px, 1024px). Fixed three bugs: mobile sidebar nav not populating due to timing issue in main.js (breakpoint handlers now query DOM dynamically), resume download link broken on non-homepage pages (changed to absolute path `/Osa Musa Resume.pdf`), and menu button invisible on light backgrounds (added `mix-blend-mode: difference` to `#navPanelToggle`).
 
 **Actions**:
 1. Test site on multiple screen sizes:
@@ -1173,7 +1175,7 @@ GitHub Pages automatically serves `404.html` for missing pages. Create a helpful
 | 14. Projects Overview Content | ✅ Complete | Created `/projects/index.html` with dynamic category cards loaded from `projects.json`. Intro text hardcoded on page; categories rendered with description, project count, and link to category landing page. |
 | 15. Missing Case Studies | ✅ Complete | 3 projects removed (not portfolio-worthy); case study created for US Housing Prices by ZIP |
 | 16. Image Optimization | ✅ Complete | Created Node.js compression script (scripts/compress-images.js) that auto-processes all images, skips bg.jpg/overlay.png, uses 1200px for featured images (detected by filename), 800px for others. Added loading="lazy" to all non-featured images in components.js. User needs to run `pnpm install` in scripts/ folder, then `pnpm compress`. Use `pnpm compress:featured <image-name>` to mark an image as featured. |
-| 17. Mobile Responsiveness | ❌ Not Started | Test and fix across breakpoints |
+| 17. Mobile Responsiveness | ✅ Complete | Tested across breakpoints. Fixed: mobile sidebar nav not populating (timing issue in main.js), resume download link broken on non-homepage pages (changed to absolute path), menu button invisible on light backgrounds (added mix-blend-mode: difference) |
 | 18. Dark Mode Toggle | ❌ Not Started | Add theme toggle with CSS custom properties |
 | 19. SEO Meta Tags | ❌ Not Started | Add meta descriptions, Open Graph tags, structured data |
 | 20. Custom 404 Page | ❌ Not Started | Create helpful error page at `/404.html` |
