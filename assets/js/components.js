@@ -157,7 +157,7 @@ async function loadHomepageProjects() {
         });
 
         const homepageProjects = allProjects
-            .filter(p => p.homepage)
+            .filter(p => p.homepageOrder !== null)
             .sort((a, b) => a.homepageOrder - b.homepageOrder);
 
         const featured = homepageProjects.find(p => p.homepageOrder === 1);
