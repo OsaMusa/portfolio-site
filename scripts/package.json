@@ -1,0 +1,13 @@
+{
+  "name": "portfolio-scripts",
+  "version": "1.0.0",
+  "description": "Automation scripts for portfolio site",
+  "private": true,
+  "scripts": {
+    "compress": "node compress-images.js",
+    "compress:featured": "node compress-images.js --featured"
+  },
+  "dependencies": {
+    "sharp": "^0.33.5"
+  }
+}

@@ -176,7 +176,7 @@ async function loadHomepageProjects() {
                         <p>${featured.description}</p>
                     </header>
                     <a href="projects/${featured._category}/${featured.slug}/" class="image main">
-                        <img src="assets/images/${featured.image}" alt="${featured.title}" />
+                        <img src="assets/images/featured-project-pic.webp" alt="${featured.title}" />
                     </a>
                     <ul class="actions special">
                         <li><a href="projects/${featured._category}/${featured.slug}/" class="button">Learn More</a></li>
@@ -192,7 +192,7 @@ async function loadHomepageProjects() {
                         <h2>${project.title}</h2>
                     </header>
                     <a href="projects/${project._category}/${project.slug}/" class="image fit">
-                        <img src="assets/images/${project.image}" alt="${project.title}" />
+                        <img src="assets/images/${project.image}" alt="${project.title}" loading="lazy" />
                     </a>
                     ${project.impact ? `<p><strong>Impact:</strong> ${project.impact}</p>` : ''}
                     <p>${project.description}</p>
@@ -239,7 +239,7 @@ async function loadCategoryProjects() {
                     <h2>${project.title}</h2>
                 </header>
                 <a href="${project.slug}/" class="image fit">
-                    <img src="../../assets/images/${project.image}" alt="${project.title}" />
+                    <img src="../../assets/images/${project.image}" alt="${project.title}" loading="lazy" />
                 </a>
                 ${project.impact ? `<p><strong>Impact:</strong> ${project.impact}</p>` : ''}
                 <p>${project.description}</p>

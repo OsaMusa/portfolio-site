@@ -1074,18 +1074,67 @@ GitHub Pages automatically serves `404.html` for missing pages. Create a helpful
 
 ---
 
-### 21. Verify GitHub Pages Configuration
+### 21. Migrate to Cloudflare Pages with GitHub Actions
 
-**Actions**:
-1. Confirm repository settings point to correct branch (usually `main` or `gh-pages`)
-2. Verify base path works correctly for subdirectory navigation
-3. Test that all internal links use relative paths or absolute paths with correct base
-4. If using a custom domain, ensure DNS is configured properly
-5. After deployment, manually test navigation across all pages including:
-   - Homepage → Project cards → Case studies
-   - Category landing pages → Individual projects
-   - Dropdown navigation on all pages
-   - Back buttons within case studies
+**Goal**: Move hosting from GitHub Pages to Cloudflare Pages to enable making the repository private.
+
+**Deployment method**: Use GitHub Actions workflow instead of Cloudflare's direct Git integration (avoids counting against the 500 builds/month limit).
+
+#### Setup Steps:
+
+1. **Create GitHub Actions workflow** at `.github/workflows/deploy.yml`:
+   ```yaml
+   name: Deploy to Cloudflare Pages
+   
+   on:
+     push:
+       branches:
+         - main
+   
+   jobs:
+     deploy:
+       runs-on: ubuntu-latest
+       steps:
+         - uses: actions/checkout@v4
+         
+         - name: Deploy to Cloudflare Pages
+           uses: cloudflare/pages-action@v1
+           with:
+             apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+             accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+             projectName: your-project-name
+             directory: .
+   ```
+
+2. **Create Cloudflare Pages project**:
+   - Go to Cloudflare dashboard > Workers & Pages > Pages
+   - Choose "Direct upload" (not "Connect to Git")
+   - Name the project (becomes `your-project-name.pages.dev`)
+   - Note the Account ID from the Pages overview
+
+3. **Create Cloudflare API token**:
+   - My Profile > API Tokens > Create Token
+   - Permissions needed: Account > Cloudflare Pages > Edit
+   - Copy the token
+
+4. **Add GitHub repository secrets**:
+   - Settings > Secrets and variables > Actions
+   - `CLOUDFLARE_API_TOKEN` — the API token
+   - `CLOUDFLARE_ACCOUNT_ID` — from Cloudflare dashboard
+
+5. **Make repository private**:
+   - After first successful deployment, change repo visibility to private
+   - GitHub Actions workflows continue to work with private repos on free tier
+
+6. **Test deployment**:
+   - Push to main branch triggers automatic deployment
+   - Verify site at `your-project-name.pages.dev`
+   - Test all navigation paths and page loads
+
+**Notes**:
+- No build process needed (static site)
+- Deploy directory is `.` (root)
+- Downtime is acceptable since site is under active development
 
 ---
 
@@ -1123,11 +1172,11 @@ GitHub Pages automatically serves `404.html` for missing pages. Create a helpful
 | 13. About Page Migration | ✅ Complete | Moved to `/about/index.html` |
 | 14. Projects Overview Content | ✅ Complete | Created `/projects/index.html` with dynamic category cards loaded from `projects.json`. Intro text hardcoded on page; categories rendered with description, project count, and link to category landing page. |
 | 15. Missing Case Studies | ✅ Complete | 3 projects removed (not portfolio-worthy); case study created for US Housing Prices by ZIP |
-| 16. Image Optimization | ❌ Not Started | Compress images, add lazy loading |
+| 16. Image Optimization | ✅ Complete | Created Node.js compression script (scripts/compress-images.js) that auto-processes all images, skips bg.jpg/overlay.png, uses 1200px for featured images (detected by filename), 800px for others. Added loading="lazy" to all non-featured images in components.js. User needs to run `pnpm install` in scripts/ folder, then `pnpm compress`. Use `pnpm compress:featured <image-name>` to mark an image as featured. |
 | 17. Mobile Responsiveness | ❌ Not Started | Test and fix across breakpoints |
 | 18. Dark Mode Toggle | ❌ Not Started | Add theme toggle with CSS custom properties |
 | 19. SEO Meta Tags | ❌ Not Started | Add meta descriptions, Open Graph tags, structured data |
 | 20. Custom 404 Page | ❌ Not Started | Create helpful error page at `/404.html` |
-| 21. GitHub Pages Config | ❌ Not Started | Verify deployment settings and navigation |
+| 21. Cloudflare Pages Migration | ❌ Not Started | Defer until improvement list complete — switch from GitHub Pages to enable private repo |
 
-**Core structural migration is ~75% complete.** The site has the correct directory structure, migrated case studies, updated homepage links, fully functional dropdown navigation with category-based organization, and a projects overview page that dynamically renders all categories. Portfolio trimmed from 9 to 6 projects after assessment. All case studies complete. Next priorities: image optimization, mobile responsiveness testing, and dark mode toggle.
+**Core structural migration is ~75% complete.** The site has the correct directory structure, migrated case studies, updated homepage links, fully functional dropdown navigation with category-based organization, and a projects overview page that dynamically renders all categories. Portfolio trimmed from 9 to 6 projects after assessment. All case studies complete. Next priorities: image optimization, mobile responsiveness testing, and dark mode toggle. Cloudflare Pages migration deferred until all improvements are complete.

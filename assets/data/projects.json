@@ -7,7 +7,7 @@
                 {
                     "slug": "mass-appraisal-tool",
                     "title": "Mass Appraisal Tool",
-                    "image": "mass-appraisal-tool-pic.jpg",
+                    "image": "mass-appraisal-tool-pic.webp",
                     "impact": "Enabled a single consultant to evaluate 1,000+ properties simultaneously, automatically highlighting valuation differences to prioritize high-value appeal cases.",
                     "description": "A tool using the company's chosen methodologies to valuate properties against an assessor's proposed value.",
                     "homepage": true,
@@ -17,7 +17,7 @@
                 {
                     "slug": "report-generator",
                     "title": "Report Generator",
-                    "image": "report-generator-pic.jpg",
+                    "image": "report-generator-pic.webp",
                     "impact": "Cut evidence report generation time from 1.5 hours to 45 seconds, simplifying training for new consultants.",
                     "description": "A macro that transfers data (text, images, charts, etc.) from an Excel workbook to a Word document.",
                     "homepage": true,
@@ -27,17 +27,17 @@
                 {
                     "slug": "outlook-automation",
                     "title": "Outlook Automation",
-                    "image": "outlook-automation-pic.jpg",
+                    "image": "outlook-automation-pic.webp",
                     "impact": "Eliminated a manual scheduling task that consumed 20+ hours per week per assistant, updating hearing calendars for all US consultants in under 3 minutes.",
                     "description": "A flow that updates consultant Outlook calendars to show upcoming appeal hearings.",
-                    "homepage": false,
-                    "homepageOrder": null,
+                    "homepage": true,
+                    "homepageOrder": 5,
                     "status": "completed"
                 },
                 {
                     "slug": "appeal-form-automations",
                     "title": "Appeal Form Automations",
-                    "image": "appeal-form-automations-pic.jpg",
+                    "image": "appeal-form-automations-pic.webp",
                     "impact": "Processed 300+ forms automatically, reducing a 3-day manual process to under 3 minutes and enabling a single team member to complete the work.",
                     "description": "A set of automations made for filling out large numbers of appeal forms specific to the assessor and appeal type.",
                     "homepage": false,
@@ -53,7 +53,7 @@
                 {
                     "slug": "housing-prices",
                     "title": "US Average Housing Prices by ZIP",
-                    "image": "us-property-values-pic-FEATURED.jpg",
+                    "image": "us-property-values-pic.webp",
                     "impact": "Visualized housing data for 40,000+ ZIP codes across 20+ years of Zillow data, with data through February 2024.",
                     "description": "A site with visualizations that showed the average home values across the US by zip code since January 2000. All data was provided by Zillow Group. Visit the site and see how the values in the areas that interest you had changed. For a look into the code behind it, you could visit my Github repository by clicking the button below.",
                     "homepage": true,
@@ -69,7 +69,7 @@
                 {
                     "slug": "ticketing-system",
                     "title": "Ticketing System",
-                    "image": "ticketing-system-pic.jpg",
+                    "image": "ticketing-system-pic.webp",
                     "impact": "Centralized request tracking for 10+ weekly submissions, enabling process visualization and prioritization while automating status notifications. The system's effectiveness led to adoption by another department.",
                     "description": "A system built to track reported issues, who they're assigned to, and send status updates to issue reporters.",
                     "homepage": true,
