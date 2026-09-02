@@ -4,6 +4,9 @@
   "agent": {
     "project-documenter": {
       "model": "kilo/qwen/qwen3.7-plus"
+    },
+    "category-page-builder": {
+      "model": "kilo/qwen/qwen3.7-plus"
     }
   }
 }
