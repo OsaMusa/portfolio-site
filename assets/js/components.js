@@ -1,10 +1,13 @@
 // Load HTML component into placeholder
 async function loadComponent(id, url) {
+    const target = document.getElementById(id);
+    if (!target) return;
+
     try {
         const response = await fetch(url);
         if (!response.ok) throw new Error(`Failed to load ${url}`);
         const html = await response.text();
-        document.getElementById(id).innerHTML = html;
+        target.innerHTML = html;
         
         // If loading nav, set active state
         if (id === 'nav-placeholder') {
@@ -15,6 +18,11 @@ async function loadComponent(id, url) {
             if (typeof breakpoints !== 'undefined' && breakpoints.active('<=medium')) {
                 $('#navPanel').children('nav').append($('#nav').children());
                 $('#navPanel').find('.icons, .icon').addClass('alt');
+            }
+
+            // Sync theme toggle icon now that the nav exists in the DOM
+            if (typeof window.syncThemeToggle === 'function') {
+                window.syncThemeToggle();
             }
         }
 

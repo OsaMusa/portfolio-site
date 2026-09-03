@@ -7,6 +7,57 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
+/* Theme variables */
+
+	:root {
+		--bg-color: #ffffff;
+		--alt-bg-color: #f5f5f5;
+		--text-color: #212931;
+		--heading-color: #212931;
+		--muted-color: #717981;
+		--faint-color: #909498;
+		--border-color: #eeeeee;
+		--alt-border-color: #e2e2e2;
+		--icon-ring-color: #eeeeee;
+		--link-underline-color: rgba(33, 41, 49, 0.5);
+		--code-bg-color: rgba(220, 220, 220, 0.25);
+		--row-alt-bg-color: rgba(220, 220, 220, 0.25);
+	}
+
+	@media (prefers-color-scheme: dark) {
+
+		:root:not([data-theme]) {
+			--bg-color: #212931;
+			--alt-bg-color: #1a2027;
+			--text-color: #c8cdd3;
+			--heading-color: #ffffff;
+			--muted-color: #9aa2ab;
+			--faint-color: #868e98;
+			--border-color: #3a434e;
+			--alt-border-color: #323b45;
+			--icon-ring-color: #55606c;
+			--link-underline-color: rgba(200, 205, 211, 0.5);
+			--code-bg-color: rgba(255, 255, 255, 0.075);
+			--row-alt-bg-color: rgba(255, 255, 255, 0.05);
+		}
+
+	}
+
+	:root[data-theme="dark"] {
+		--bg-color: #212931;
+		--alt-bg-color: #1a2027;
+		--text-color: #c8cdd3;
+		--heading-color: #ffffff;
+		--muted-color: #9aa2ab;
+		--faint-color: #868e98;
+		--border-color: #3a434e;
+		--alt-border-color: #323b45;
+		--icon-ring-color: #55606c;
+		--link-underline-color: rgba(200, 205, 211, 0.5);
+		--code-bg-color: rgba(255, 255, 255, 0.075);
+		--row-alt-bg-color: rgba(255, 255, 255, 0.05);
+	}
+
 html, body, div, span, applet, object,
 iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 pre, a, abbr, acronym, address, big, cite,
@@ -144,7 +195,8 @@ input, select, textarea {
 		}
 
 	body {
-		color: #212931;
+		color: var(--text-color);
+		transition: background-color 0.25s ease-in-out, color 0.25s ease-in-out;
 	}
 
 	body, input, select, textarea {
@@ -288,12 +340,12 @@ input, select, textarea {
 	}
 
 	input, select, textarea {
-		color: #212931;
+		color: var(--text-color);
 	}
 
 	a {
-		color: #212931;
-		border-bottom-color: rgba(33, 41, 49, 0.5);
+		color: var(--text-color);
+		border-bottom-color: var(--link-underline-color);
 	}
 
 		a:hover {
@@ -302,24 +354,26 @@ input, select, textarea {
 		}
 
 	strong, b {
-		color: #212931;
+		color: var(--heading-color);
+		transition: color 0.25s ease-in-out;
 	}
 
 	h1, h2, h3, h4, h5, h6 {
-		color: #212931;
+		color: var(--heading-color);
+		transition: color 0.25s ease-in-out;
 	}
 
 	blockquote {
-		border-left-color: #eeeeee;
+		border-left-color: var(--border-color);
 	}
 
 	code {
-		background: rgba(220, 220, 220, 0.25);
-		border-color: #eeeeee;
+		background: var(--code-bg-color);
+		border-color: var(--border-color);
 	}
 
 	hr {
-		border-bottom-color: #eeeeee;
+		border-bottom-color: var(--border-color);
 	}
 
 /* Row */
@@ -2041,6 +2095,7 @@ input, select, textarea {
 		border: solid 2px;
 		margin-bottom: 2rem;
 		padding: 1.5rem;
+		transition: border-color 0.25s ease-in-out;
 	}
 
 		.box > :last-child,
@@ -2056,7 +2111,7 @@ input, select, textarea {
 		}
 
 	.box {
-		border-color: #eeeeee;
+		border-color: var(--border-color);
 	}
 
 /* Button */
@@ -2206,8 +2261,8 @@ input, select, textarea {
 	button,
 	.button {
 		background-color: transparent;
-		box-shadow: inset 0 0 0 2px #212931;
-		color: #212931 !important;
+		box-shadow: inset 0 0 0 2px var(--text-color);
+		color: var(--text-color) !important;
 	}
 
 		input[type="submit"]:hover,
@@ -2224,9 +2279,9 @@ input, select, textarea {
 		input[type="button"].primary,
 		button.primary,
 		.button.primary {
-			background-color: #212931;
+			background-color: var(--text-color);
 			box-shadow: none;
-			color: #ffffff !important;
+			color: var(--bg-color) !important;
 		}
 
 			input[type="submit"].primary:hover,
@@ -2475,7 +2530,7 @@ input, select, textarea {
 	}
 
 	label {
-		color: #212931;
+		color: var(--text-color);
 	}
 
 	input[type="text"],
@@ -2483,7 +2538,7 @@ input, select, textarea {
 	input[type="email"],
 	select,
 	textarea {
-		border-color: #eeeeee;
+		border-color: var(--border-color);
 	}
 
 		input[type="text"]:focus,
@@ -2499,29 +2554,29 @@ input, select, textarea {
 	}
 
 		select option {
-			background-color: #ffffff;
-			color: #212931;
+			background-color: var(--bg-color);
+			color: var(--text-color);
 		}
 
 	.select-wrapper:before {
-		color: #eeeeee;
+		color: var(--border-color);
 	}
 
 	input[type="checkbox"] + label,
 	input[type="radio"] + label {
-		color: #212931;
+		color: var(--text-color);
 	}
 
 		input[type="checkbox"] + label:before,
 		input[type="radio"] + label:before {
-			border-color: #eeeeee;
+			border-color: var(--border-color);
 		}
 
 	input[type="checkbox"]:checked + label:before,
 	input[type="radio"]:checked + label:before {
-		background-color: #212931;
-		border-color: #212931;
-		color: #ffffff;
+		background-color: var(--text-color);
+		border-color: var(--text-color);
+		color: var(--bg-color);
 	}
 
 	input[type="checkbox"]:focus + label:before,
@@ -2886,7 +2941,7 @@ input, select, textarea {
 		}
 
 	ul.divided li {
-		border-top-color: #eeeeee;
+		border-top-color: var(--border-color);
 	}
 
 	ul.icons li a.icon:hover:before {
@@ -2894,7 +2949,7 @@ input, select, textarea {
 	}
 
 	ul.icons.alt li .icon:before {
-		box-shadow: inset 0 0 0 2px #eeeeee;
+		box-shadow: inset 0 0 0 2px var(--icon-ring-color);
 	}
 
 	ul.icons.alt li a.icon:hover:before {
@@ -2997,7 +3052,7 @@ input, select, textarea {
 		}
 
 	header.major .date:before, header.major .date:after {
-		border-top-color: #eeeeee;
+		border-top-color: var(--border-color);
 	}
 
 /* Table */
@@ -3076,27 +3131,27 @@ input, select, textarea {
 			}
 
 	table tbody tr {
-		border-color: #eeeeee;
+		border-color: var(--border-color);
 	}
 
 		table tbody tr:nth-child(2n + 1) {
-			background-color: rgba(220, 220, 220, 0.25);
+			background-color: var(--row-alt-bg-color);
 		}
 
 	table th {
-		color: #212931;
+		color: var(--heading-color);
 	}
 
 	table thead {
-		border-bottom-color: #eeeeee;
+		border-bottom-color: var(--border-color);
 	}
 
 	table tfoot {
-		border-top-color: #eeeeee;
+		border-top-color: var(--border-color);
 	}
 
 	table.alt tbody tr td {
-		border-color: #eeeeee;
+		border-color: var(--border-color);
 	}
 
 /* Pagination */
@@ -3189,11 +3244,11 @@ input, select, textarea {
 		}
 
 	.pagination a, .pagination span {
-		border-color: #eeeeee;
+		border-color: var(--border-color);
 	}
 
 	.pagination a {
-		color: #212931 !important;
+		color: var(--text-color) !important;
 	}
 
 		.pagination a:hover {
@@ -3208,11 +3263,11 @@ input, select, textarea {
 			}
 
 		.pagination a.active {
-			background-color: #eeeeee;
+			background-color: var(--border-color);
 		}
 
 	.pagination span {
-		color: #eeeeee;
+		color: var(--border-color);
 	}
 
 /* Wrapper */
@@ -3756,18 +3811,20 @@ input, select, textarea {
 /* Main */
 
 	#main {
-		background-color: #ffffff;
+		background-color: var(--bg-color);
 		position: relative;
 		margin: 0 auto;
 		width: calc(100% - 4rem);
 		max-width: 72rem;
 		z-index: 2;
+		transition: background-color 0.25s ease-in-out;
 	}
 
 		#main > * {
 			padding: 4rem 4rem 2rem 4rem ;
-			border-top: solid 2px #eeeeee;
+			border-top: solid 2px var(--border-color);
 			margin: 0;
+			transition: border-color 0.25s ease-in-out;
 		}
 
 			#main > *:first-child {
@@ -3862,11 +3919,12 @@ input, select, textarea {
 			}
 
 			#main > .posts > article {
-				border-color: #eeeeee;
+				border-color: var(--border-color);
 				border-left-width: 2px;
 				border-style: solid;
 				border-top-width: 2px;
 				text-align: center;
+				transition: border-color 0.25s ease-in-out;
 			}
 
 				#main > .posts > article > :last-child {
@@ -3948,27 +4006,28 @@ input, select, textarea {
 /* Footer */
 
 	#footer {
-		color: #717981;
+		color: var(--muted-color);
 		display: -moz-flex;
 		display: -webkit-flex;
 		display: -ms-flex;
 		display: flex;
-		background-color: #f5f5f5;
-		color: #909498;
+		background-color: var(--alt-bg-color);
+		color: var(--faint-color);
 		cursor: default;
 		position: relative;
 		margin: 0 auto;
 		width: calc(100% - 4rem);
 		max-width: 72rem;
 		z-index: 2;
+		transition: background-color 0.25s ease-in-out;
 	}
 
 		#footer input, #footer select, #footer textarea {
-			color: #717981;
+			color: var(--muted-color);
 		}
 
 		#footer a {
-			color: #717981;
+			color: var(--muted-color);
 			border-bottom-color: rgba(113, 121, 129, 0.5);
 		}
 
@@ -3978,28 +4037,28 @@ input, select, textarea {
 			}
 
 		#footer strong, #footer b {
-			color: #717981;
+			color: var(--muted-color);
 		}
 
 		#footer h1, #footer h2, #footer h3, #footer h4, #footer h5, #footer h6 {
-			color: #717981;
+			color: var(--muted-color);
 		}
 
 		#footer blockquote {
-			border-left-color: #e2e2e2;
+			border-left-color: var(--alt-border-color);
 		}
 
 		#footer code {
-			background: rgba(220, 220, 220, 0.5);
-			border-color: #e2e2e2;
+			background: var(--code-bg-color);
+			border-color: var(--alt-border-color);
 		}
 
 		#footer hr {
-			border-bottom-color: #e2e2e2;
+			border-bottom-color: var(--alt-border-color);
 		}
 
 		#footer .box {
-			border-color: #e2e2e2;
+			border-color: var(--alt-border-color);
 		}
 
 		#footer input[type="submit"],
@@ -4008,8 +4067,8 @@ input, select, textarea {
 		#footer button,
 		#footer .button {
 			background-color: transparent;
-			box-shadow: inset 0 0 0 2px #717981;
-			color: #717981 !important;
+			box-shadow: inset 0 0 0 2px var(--muted-color);
+			color: var(--muted-color) !important;
 		}
 
 			#footer input[type="submit"]:hover,
@@ -4026,9 +4085,9 @@ input, select, textarea {
 			#footer input[type="button"].primary,
 			#footer button.primary,
 			#footer .button.primary {
-				background-color: #717981;
+				background-color: var(--muted-color);
 				box-shadow: none;
-				color: #f5f5f5 !important;
+				color: var(--alt-bg-color) !important;
 			}
 
 				#footer input[type="submit"].primary:hover,
@@ -4040,7 +4099,7 @@ input, select, textarea {
 				}
 
 		#footer label {
-			color: #717981;
+			color: var(--muted-color);
 		}
 
 		#footer input[type="text"],
@@ -4048,7 +4107,7 @@ input, select, textarea {
 		#footer input[type="email"],
 		#footer select,
 		#footer textarea {
-			border-color: #e2e2e2;
+			border-color: var(--alt-border-color);
 		}
 
 			#footer input[type="text"]:focus,
@@ -4064,29 +4123,29 @@ input, select, textarea {
 		}
 
 			#footer select option {
-				background-color: #f5f5f5;
-				color: #717981;
+				background-color: var(--alt-bg-color);
+				color: var(--muted-color);
 			}
 
 		#footer .select-wrapper:before {
-			color: #e2e2e2;
+			color: var(--alt-border-color);
 		}
 
 		#footer input[type="checkbox"] + label,
 		#footer input[type="radio"] + label {
-			color: #717981;
+			color: var(--muted-color);
 		}
 
 			#footer input[type="checkbox"] + label:before,
 			#footer input[type="radio"] + label:before {
-				border-color: #e2e2e2;
+				border-color: var(--alt-border-color);
 			}
 
 		#footer input[type="checkbox"]:checked + label:before,
 		#footer input[type="radio"]:checked + label:before {
-			background-color: #717981;
-			border-color: #717981;
-			color: #f5f5f5;
+			background-color: var(--muted-color);
+			border-color: var(--muted-color);
+			color: var(--alt-bg-color);
 		}
 
 		#footer input[type="checkbox"]:focus + label:before,
@@ -4115,7 +4174,7 @@ input, select, textarea {
 		}
 
 		#footer ul.divided li {
-			border-top-color: #e2e2e2;
+			border-top-color: var(--alt-border-color);
 		}
 
 		#footer ul.icons li a.icon:hover:before {
@@ -4123,7 +4182,7 @@ input, select, textarea {
 		}
 
 		#footer ul.icons.alt li .icon:before {
-			box-shadow: inset 0 0 0 2px #e2e2e2;
+			box-shadow: inset 0 0 0 2px var(--icon-ring-color);
 		}
 
 		#footer ul.icons.alt li a.icon:hover:before {
@@ -4131,39 +4190,39 @@ input, select, textarea {
 		}
 
 		#footer header.major .date:before, #footer header.major .date:after {
-			border-top-color: #e2e2e2;
+			border-top-color: var(--alt-border-color);
 		}
 
 		#footer table tbody tr {
-			border-color: #e2e2e2;
+			border-color: var(--alt-border-color);
 		}
 
-			#footer table tbody tr:nth-child(2n + 1) {
-				background-color: rgba(220, 220, 220, 0.5);
-			}
+		#footer table tbody tr:nth-child(2n + 1) {
+			background-color: var(--row-alt-bg-color);
+		}
 
 		#footer table th {
-			color: #717981;
+			color: var(--muted-color);
 		}
 
 		#footer table thead {
-			border-bottom-color: #e2e2e2;
+			border-bottom-color: var(--alt-border-color);
 		}
 
 		#footer table tfoot {
-			border-top-color: #e2e2e2;
+			border-top-color: var(--alt-border-color);
 		}
 
 		#footer table.alt tbody tr td {
-			border-color: #e2e2e2;
+			border-color: var(--alt-border-color);
 		}
 
 		#footer .pagination a, #footer .pagination span {
-			border-color: #e2e2e2;
+			border-color: var(--alt-border-color);
 		}
 
 		#footer .pagination a {
-			color: #717981 !important;
+			color: var(--muted-color) !important;
 		}
 
 			#footer .pagination a:hover {
@@ -4178,11 +4237,11 @@ input, select, textarea {
 				}
 
 			#footer .pagination a.active {
-				background-color: #e2e2e2;
+				background-color: var(--alt-border-color);
 			}
 
 		#footer .pagination span {
-			color: #e2e2e2;
+			color: var(--alt-border-color);
 		}
 
 		#footer > section {
@@ -4199,7 +4258,7 @@ input, select, textarea {
 			-ms-flex-shrink: 1;
 			flex-shrink: 1;
 			padding: 4rem 4rem 2rem 4rem ;
-			border-left: solid 2px #e2e2e2;
+			border-left: solid 2px var(--alt-border-color);
 		}
 
 			#footer > section:first-child {
@@ -4220,7 +4279,7 @@ input, select, textarea {
 
 				#footer > section.split > section {
 					padding: 3rem 4rem 1rem 4rem ;
-					border-top: solid 2px #e2e2e2;
+					border-top: solid 2px var(--alt-border-color);
 				}
 
 					#footer > section.split > section:first-child {
@@ -4303,7 +4362,7 @@ input, select, textarea {
 			}
 
 				#footer > section {
-					border-top: solid 2px #e2e2e2;
+					border-top: solid 2px var(--alt-border-color);
 				}
 
 					#footer > section:first-child {
@@ -4563,9 +4622,9 @@ input, select, textarea {
 		transition: transform 0.5s ease, box-shadow 0.5s ease, visibility 0.5s;
 		display: none;
 		-webkit-overflow-scrolling: touch;
-		background: #ffffff;
+		background: var(--bg-color);
 		box-shadow: none;
-		color: #212931;
+		color: var(--text-color);
 		height: 100%;
 		max-width: 80%;
 		overflow-y: auto;
@@ -4584,7 +4643,7 @@ input, select, textarea {
 		}
 
 			#navPanel .links li {
-				border-top: solid 2px #eeeeee;
+				border-top: solid 2px var(--border-color);
 			}
 
 				#navPanel .links li a {
@@ -4611,7 +4670,7 @@ input, select, textarea {
 			transition: color 0.2s ease-in-out;
 			-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 			border: 0;
-			color: #909498;
+			color: var(--faint-color);
 			cursor: pointer;
 			display: block;
 			height: 3.25rem;
@@ -4643,7 +4702,7 @@ input, select, textarea {
 			}
 
 			#navPanel .close:hover {
-				color: #212931;
+				color: var(--heading-color);
 			}
 
 			@media screen and (max-width: 736px) {
@@ -4709,14 +4768,15 @@ input, select, textarea {
 	position: absolute;
 	top: 100%;
 	left: 0;
-	background: #ffffff;
-	border: 1px solid rgba(210, 215, 217, 0.75);
+	background: var(--bg-color);
+	border: 1px solid var(--border-color);
 	min-width: 180px;
 	z-index: 9999;
 	list-style: none;
 	padding: 0.5em 0;
 	margin: 0;
 	flex-direction: column;
+	transition: background-color 0.25s ease-in-out;
 }
 
 #nav ul.links li .dropdown-menu li {
@@ -4733,11 +4793,12 @@ input, select, textarea {
 	letter-spacing: 0.075em;
 	font-family: "Source Sans Pro", Helvetica, sans-serif;
 	font-weight: 900;
-	color: #1e252d;
+	color: var(--heading-color);
+	border-bottom: 0;
 }
 
 #nav ul.links li .dropdown-menu li a:hover {
-	background: #f5f5f5;
+	background: var(--alt-bg-color);
 	color: #18bfef !important;
 }
 
