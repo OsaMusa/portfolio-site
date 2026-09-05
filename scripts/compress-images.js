@@ -45,7 +45,7 @@ async function compressImage(inputPath, outputPath, maxWidth = 800, maxHeight = 
     });
     wasResized = true;
   } else {
-    if (metadata.width > maxWidth || metadata.height > maxHeight) {
+    if (metadata.width > maxWidth || (maxHeight !== null && metadata.height > maxHeight)) {
       image = image.resize(maxWidth, maxHeight, {
         fit: 'inside',
         kernel: sharp.kernel.lanczos3
