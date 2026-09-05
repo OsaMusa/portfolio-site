@@ -6,6 +6,7 @@
  * Usage:
  *   node compress-images.js                          # Process all images at 800px
  *   node compress-images.js --featured <image>       # Create featured-project-pic.webp at 1200px
+ *   node compress-images.js --share <image>          # Create share-image.jpg at 1200x630px
  *   node compress-images.js --quality 90             # Higher quality
  */
 
@@ -17,6 +18,9 @@ const SKIP_FILES = [];
 const FEATURED_FILENAME = 'featured-project-pic.webp';
 const FEATURED_WIDTH = 1200;
 const FEATURED_HEIGHT = 600;
+const SHARE_FILENAME = 'share-image.jpg';
+const SHARE_WIDTH = 1200;
+const SHARE_HEIGHT = 630;
 const THUMBNAIL_WIDTH = 800;
 const THUMBNAIL_HEIGHT = 450;
 
@@ -25,7 +29,7 @@ function getFileSizeMB(filePath) {
   return stats.size / (1024 * 1024);
 }
 
-async function compressImage(inputPath, outputPath, maxWidth = 800, maxHeight = null, quality = 85, deleteOriginal = true) {
+async function compressImage(inputPath, outputPath, maxWidth = 800, maxHeight = null, quality = 85, deleteOriginal = true, format = 'webp') {
   const originalSize = getFileSizeMB(inputPath);
   
   let image = sharp(inputPath);
@@ -50,9 +54,16 @@ async function compressImage(inputPath, outputPath, maxWidth = 800, maxHeight = 
     }
   }
   
-  await image
-    .webp({ quality: quality })
-    .toFile(outputPath);
+  if (format === 'jpg') {
+    await image
+      .flatten({ background: '#212931' })
+      .jpeg({ quality: quality })
+      .toFile(outputPath);
+  } else {
+    await image
+      .webp({ quality: quality })
+      .toFile(outputPath);
+  }
   
   const compressedSize = getFileSizeMB(outputPath);
   
@@ -126,6 +137,61 @@ async function createFeaturedImage(imageName, inputDir, outputDir, quality = 85)
   }
 }
 
+async function createShareImage(imageName, inputDir, outputDir, quality = 85) {
+  const files = fs.readdirSync(inputDir);
+  const targetFile = files.find(f => f === imageName || f.startsWith(imageName));
+
+  if (!targetFile) {
+    console.log(`✗ Image not found: ${imageName}`);
+    return false;
+  }
+
+  const inputPath = path.join(inputDir, targetFile);
+  const outputPath = path.join(outputDir, SHARE_FILENAME);
+  const tempPath = path.join(outputDir, `.tmp-${SHARE_FILENAME}`);
+  const isAlreadyShareImage = targetFile === SHARE_FILENAME;
+
+  console.log(`Creating share image from ${targetFile}...`);
+
+  try {
+    const { originalSize, compressedSize, wasResized } = await compressImage(
+      inputPath,
+      tempPath,
+      SHARE_WIDTH,
+      SHARE_HEIGHT,
+      quality,
+      false,
+      'jpg'
+    );
+
+    if (fs.existsSync(outputPath)) {
+      fs.unlinkSync(outputPath);
+    }
+    fs.renameSync(tempPath, outputPath);
+
+    if (!isAlreadyShareImage) {
+      fs.unlinkSync(inputPath);
+    }
+
+    const reduction = originalSize > 0
+      ? ((originalSize - compressedSize) / originalSize * 100)
+      : 0;
+    const resizeNote = wasResized ? ' (resized)' : '';
+    const deleteNote = !isAlreadyShareImage ? ' (original deleted)' : '';
+
+    console.log(`✓ Created ${SHARE_FILENAME} from ${targetFile}`);
+    console.log(`  ${originalSize.toFixed(2)} MB → ${compressedSize.toFixed(2)} MB (${reduction.toFixed(1)}% reduction)${resizeNote}${deleteNote}`);
+    return true;
+
+  } catch (error) {
+    if (fs.existsSync(tempPath)) {
+      fs.unlinkSync(tempPath);
+    }
+    console.log(`✗ Error creating share image: ${error.message}`);
+    return false;
+  }
+}
+
 async function compressImages(inputDir, outputDir, quality = 85, overwrite = false) {
   if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir, { recursive: true });
@@ -139,7 +205,8 @@ async function compressImages(inputDir, outputDir, quality = 85, overwrite = fal
     const isSupported = supportedExtensions.includes(ext);
     const isSkipped = SKIP_FILES.includes(file.toLowerCase());
     const isFeaturedOutput = file === FEATURED_FILENAME;
-    return isSupported && !isSkipped && !isFeaturedOutput;
+    const isShareOutput = file === SHARE_FILENAME;
+    return isSupported && !isSkipped && !isFeaturedOutput && !isShareOutput;
   });
   
   if (images.length === 0) {
@@ -209,6 +276,7 @@ function parseArgs() {
   const args = process.argv.slice(2);
   const options = {
     featured: null,
+    share: null,
     quality: 85,
     inputDir: '../assets/images',
     outputDir: '../assets/images',
@@ -220,6 +288,9 @@ function parseArgs() {
     
     if (arg === '--featured' && args[i + 1]) {
       options.featured = args[i + 1];
+      i++;
+    } else if (arg === '--share' && args[i + 1]) {
+      options.share = args[i + 1];
       i++;
     } else if (arg === '--quality' && args[i + 1]) {
       options.quality = parseInt(args[i + 1], 10);
@@ -239,12 +310,14 @@ Image compression script for portfolio site.
 Usage:
   node compress-images.js                          # Process all images at ${THUMBNAIL_WIDTH}px
   node compress-images.js --featured <image>       # Create ${FEATURED_FILENAME} at ${FEATURED_WIDTH}px
+  node compress-images.js --share <image>          # Create ${SHARE_FILENAME} at ${SHARE_WIDTH}x${SHARE_HEIGHT}px
   node compress-images.js --quality 90             # Higher quality
   node compress-images.js --overwrite              # Overwrite existing files
 
 Options:
   --featured <name>   Create featured image from source (saves as ${FEATURED_FILENAME})
-  --quality <1-100>   WebP quality (default: 85)
+  --share <name>      Create share image from source (saves as ${SHARE_FILENAME})
+  --quality <1-100>   Output quality (default: 85)
   --input-dir <path>  Input directory (default: ../assets/images)
   --output-dir <path> Output directory (default: ../assets/images)
   --overwrite         Overwrite existing WebP files
@@ -253,6 +326,7 @@ Options:
 Behavior:
   - Default run: All images compressed to fit within ${THUMBNAIL_WIDTH}x${THUMBNAIL_HEIGHT}px (preserves aspect ratio)
   - Featured: Creates ${FEATURED_FILENAME} at exactly ${FEATURED_WIDTH}x${FEATURED_HEIGHT}px (crops to fit)
+  - Share: Creates ${SHARE_FILENAME} at exactly ${SHARE_WIDTH}x${SHARE_HEIGHT}px (crops to fit, JPEG output)
   - Skips: ${SKIP_FILES.join(', ')}
       `);
       process.exit(0);
@@ -268,6 +342,16 @@ async function main() {
   if (options.featured) {
     const success = await createFeaturedImage(
       options.featured,
+      options.inputDir,
+      options.outputDir,
+      options.quality
+    );
+    if (!success) {
+      process.exit(1);
+    }
+  } else if (options.share) {
+    const success = await createShareImage(
+      options.share,
       options.inputDir,
       options.outputDir,
       options.quality

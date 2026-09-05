@@ -57,6 +57,8 @@ When adding or updating projects in `assets/data/projects.json`:
    - **Challenges:** Technical obstacles, learning experiences
    - **Result:** Metrics, outcomes, benefits
    - **Technologies Used:** List of technologies with brief descriptions
+   - **Meta description:** Ask the user for a concise description (max 160
+     characters) for the SEO tags in `<head>`
 
 2. **Determine Visibility**:
    - **Code visibility**: Is the source code public? (GitHub link if yes)
@@ -66,9 +68,15 @@ When adding or updating projects in `assets/data/projects.json`:
 3. **Generate Case Study**:
    - Create HTML file at `/projects/{category}/{project-slug}/index.html`
    - Follow template structure from `assets/templates/project-pages.html`
-   - Set meta tags based on visibility (project-github, project-demo)
-   - If no links, omit the meta tags entirely
+   - Replace every `{{placeholder}}` in the template: `{{Project Name}}`,
+     `{{Project Description}}` (the user-provided meta description),
+     `{{category-slug}}`, `{{project-slug}}`, and `{{Company Name}}`
+   - SEO tags: `og:type` stays `article`; `og:image` and `twitter:image` always
+     point to `share-image.jpg` — never a per-project image
+   - Set visibility meta tags (project-github, project-demo) based on visibility
+   - If no links, omit the visibility meta tags entirely
    - Use correct verb tense based on project status
+   - Verify no `{{` placeholder text remains anywhere in the file
 
 4. **Interactive Refinement**:
    - Present draft to user for review
@@ -96,6 +104,8 @@ When adding or updating projects in `assets/data/projects.json`:
    - Content quality (specific metrics, clear narrative, technical depth)
    - Consistency with other case studies (formatting, tone, structure)
    - Proper meta tags and links
+   - SEO tags match the updated template (no placeholders remain, `og:type` is
+     `article`, share image is `share-image.jpg`)
    - **Correct verb tense based on project status**
 
 4. **Present findings**:
@@ -152,4 +162,5 @@ This is the sole exception to the rule of not editing other projects.
 - When reviewing, focus on the specific project requested
 - Always verify project status before writing or reviewing to ensure correct tense
 - When updating projects.json, only modify the specific project being worked on (exception: Workflow 3)
+- Always ask the user for the meta description; never draft or derive it
 - **NEVER use m-dashes (—)** - they make content appear AI-generated; use alternative punctuation or sentence structures instead

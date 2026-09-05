@@ -957,59 +957,32 @@ themeToggle?.addEventListener('click', function() {
 
 ### 19. Add SEO Meta Tags and Structured Data
 
-**Files**: All HTML pages (`index.html`, `about/index.html`, all case study pages)
+**Scope revision**: Canonical URLs and JSON-LD structured data dropped. For a portfolio site that gets traffic from direct links (resume, LinkedIn, applications) rather than organic search, they provide negligible value. Focus is on meta descriptions, Open Graph tags, and Twitter Card tags — these control link preview quality when the site is shared, and the branded-search snippet.
 
-#### Page-Specific Meta Descriptions
+**Implementation approach**: SEO tags are now hardcoded in HTML templates with `{{placeholder}}` syntax that agents replace during page creation. This ensures crawlers (which don't execute JavaScript) can read the tags. The `components.js` runtime title-setting was removed.
 
-Add unique `<meta name="description">` tags to each page:
+**Files modified**:
+- `assets/templates/project-pages.html` — Added SEO placeholders: `{{Project Name}}`, `{{Project Description}}`, `{{category-slug}}`, `{{project-slug}}`
+- `assets/templates/category-pages.html` — Added SEO placeholders: `{{Category Title}}`, `{{Category Description}}`, `{{category-slug}}`
+- `assets/js/components.js` — Removed `document.title` runtime setting (now hardcoded in templates)
+- `.kilo/agents/project-documenter.md` — Updated workflow to gather meta description from user and replace all SEO placeholders
+- `.kilo/agents/category-page-builder.md` — Updated workflow to replace all SEO placeholders and enforce ≤160 char description limit
 
-**Homepage**:
-```html
-<meta name="description" content="Portfolio of Osa Musa, a Data Analyst specializing in automation and business intelligence. View projects in Power BI, Python, SQL, and workflow automation." />
-```
+**SEO tag structure**:
+- `<title>` — Page-specific (e.g., "Project Name - Osa Musa")
+- `<meta name="description">` — Page-specific, ≤160 characters
+- `<meta property="og:title">` — Matches `<title>`
+- `<meta property="og:description">` — Matches meta description
+- `<meta property="og:type">` — "article" for projects, "website" for categories
+- `<meta property="og:url">` — Full URL with category/project slugs
+- `<meta property="og:image">` — Always `share-image.jpg` (branded share image)
+- Twitter Card tags — Mirror OG tags for Twitter compatibility
 
-**About Page**:
-```html
-<meta name="description" content="Learn about Osa Musa's background in insurance analytics, technical skills, and professional experience as a Business Analyst and Data Analyst." />
-```
-
-**Case Study Pages**:
-```html
-<meta name="description" content="Case study: Ticketing System built with Microsoft Forms, Power Automate, and Power BI to track issues and automate status notifications." />
-```
-
-#### Open Graph Tags for Social Sharing
-
-Add to `<head>` of each page:
-
-```html
-<meta property="og:title" content="Osa Musa - Data Analyst Portfolio" />
-<meta property="og:description" content="View my portfolio of data analysis and automation projects." />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://osamusa.github.io/portfolio-site/" />
-<meta property="og:image" content="https://osamusa.github.io/portfolio-site/assets/images/[page-specific-image].jpg" />
-```
-
-#### Structured Data (JSON-LD)
-
-Add to homepage `<head>`:
-
-```html
-<script type="application/ld+json">
-{
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Osa Musa",
-    "jobTitle": "Data Analyst",
-    "url": "https://osamusa.github.io/portfolio-site/",
-    "sameAs": [
-        "https://www.linkedin.com/in/osamusa/",
-        "https://github.com/OsaMusa/"
-    ],
-    "knowsAbout": ["Data Analysis", "Business Intelligence", "Process Automation", "Power BI", "Python", "SQL"]
-}
-</script>
-```
+**Agent workflow changes**:
+- Project Documenter now explicitly asks user for meta description (never drafts it)
+- Both agents verify no `{{` placeholders remain after substitution
+- Category descriptions must be ≤160 chars (doubles as SEO meta description)
+- Visibility meta tags (`project-github`, `project-demo`) omitted entirely when no links exist
 
 ---
 
@@ -1137,6 +1110,7 @@ GitHub Pages automatically serves `404.html` for missing pages. Create a helpful
 - No build process needed (static site)
 - Deploy directory is `.` (root)
 - Downtime is acceptable since site is under active development
+- **SEO URL update required**: After migration, find-and-replace all `https://osamusa.github.io/portfolio-site/` references in `og:url`, `og:image`, and `twitter:image` tags across all HTML pages with the new Cloudflare Pages domain
 
 ---
 
@@ -1177,8 +1151,8 @@ GitHub Pages automatically serves `404.html` for missing pages. Create a helpful
 | 16. Image Optimization | ✅ Complete | Created Node.js compression script (scripts/compress-images.js) that auto-processes all images, skips bg.jpg/overlay.png, uses 1200px for featured images (detected by filename), 800px for others. Added loading="lazy" to all non-featured images in components.js. User needs to run `pnpm install` in scripts/ folder, then `pnpm compress`. Use `pnpm compress:featured <image-name>` to mark an image as featured. |
 | 17. Mobile Responsiveness | ✅ Complete | Tested across breakpoints. Fixed: mobile sidebar nav not populating (timing issue in main.js), resume download link broken on non-homepage pages (changed to absolute path), menu button invisible on light backgrounds (added mix-blend-mode: difference) |
 | 18. Dark Mode Toggle | ✅ Complete | Toggle added to nav icons via nav.html component. CSS custom properties defined in :root with prefers-color-scheme and data-theme="dark" overrides. Visible surfaces converted to var() (body text, links, headings, code, hr, box, buttons, forms, tables, pagination, #main, posts borders, footer, #navPanel, dropdown). 0.25s transitions on body/headings/#main/cards/footer/navPanel/dropdown/box. Toggle JS in main.js uses capture-phase delegation (required because the nav panel stops propagation of inner clicks). syncThemeToggle() called from components.js after nav injection. Verified across desktop/mobile, light/dark, persistence, and system preference. |
-| 19. SEO Meta Tags | ❌ Not Started | Add meta descriptions, Open Graph tags, structured data |
+| 19. SEO Meta Tags | ✅ Complete | SEO infrastructure implemented: templates updated with placeholders ({{Project Name}}, {{Project Description}}, etc.), agents updated to handle placeholder substitution during page creation, components.js modified to remove runtime title setting. **Note**: Existing pages still need actual SEO content added (meta descriptions, OG tags, Twitter Cards) when creating new case studies or updating existing ones. Canonical URLs and JSON-LD dropped (low value for portfolio site). |
 | 20. Custom 404 Page | ❌ Not Started | Create helpful error page at `/404.html` |
 | 21. Cloudflare Pages Migration | ❌ Not Started | Defer until improvement list complete — switch from GitHub Pages to enable private repo |
 
-**Core structural migration is ~80% complete.** The site has the correct directory structure, migrated case studies, updated homepage links, fully functional dropdown navigation with category-based organization, and a projects overview page that dynamically renders all categories. Portfolio trimmed from 9 to 6 projects after assessment. All case studies complete. Dark mode toggle implemented. Remaining: SEO meta tags, custom 404 page, and Cloudflare Pages migration (deferred until all improvements are complete).
+**Core structural migration is ~80% complete.** The site has the correct directory structure, migrated case studies, updated homepage links, fully functional dropdown navigation with category-based organization, and a projects overview page that dynamically renders all categories. Portfolio trimmed from 9 to 6 projects after assessment. All case studies complete. Dark mode toggle implemented. SEO meta tags added. Remaining: custom 404 page and Cloudflare Pages migration (deferred until all improvements are complete).

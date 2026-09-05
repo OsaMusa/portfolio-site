@@ -237,7 +237,6 @@ async function loadCategoryProjects() {
             return;
         }
 
-        document.title = `${category.title} Projects - Osa Musa`;
         document.getElementById('category-title').textContent = `${category.title} Projects`;
         document.getElementById('category-description').textContent = category.description;
 

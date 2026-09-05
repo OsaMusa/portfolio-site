@@ -37,8 +37,9 @@ by user confirmation.
 
 ## Core principles
 1. **Template is the source of truth.** Always build from
-   `assets/templates/category-pages.html`. Copy it exactly (minus the
-   informational usage comment); never hand-write a new page or improvise.
+   `assets/templates/category-pages.html`. Copy it and replace every
+   `{{placeholder}}` in `<head>` (minus the informational usage comment);
+   never hand-write a new page or improvise.
 2. **Data drives content.** Title and description live in `projects.json`, keyed
    by the category slug. Keep the slug in `projects.json` identical to the page
    directory name.
@@ -54,7 +55,8 @@ If the user has already given the category slug, title, and description, use
 them. Otherwise ask via the question tool for:
 - Category slug (kebab-case, e.g. `automation`)
 - Category title (e.g. "Automation")
-- Category description (1–3 sentences)
+- Category description (1–3 sentences, max 160 characters — it doubles as the
+  SEO meta description in the page's `<head>`)
 
 ### 2. Check the template
 Confirm `assets/templates/category-pages.html` exists. If it's missing, stop and
@@ -68,6 +70,12 @@ before overwriting.
 Copy the template to `projects/{category}/index.html`:
 - Strip the top-of-file usage comment block (`<!-- ... -->` preceding `<html>`) —
   it's documentation, not part of the rendered page.
+- Replace every `{{placeholder}}` in `<head>`:
+  - `{{Category Title}}` → the category title (appears in `<title>`, `og:title`,
+    and `twitter:title`)
+  - `{{Category Description}}` → the category description (appears in
+    `meta description`, `og:description`, and `twitter:description`)
+  - `{{category-slug}}` → the category slug (appears in `og:url`)
 - Keep every other line identical, including all relative `../../assets/...`
   paths and script tags.
 
@@ -92,6 +100,8 @@ Confirm all of the following by reading files (no shell access):
 - The category's `projects` array exists (even if empty).
 - Relative paths (`../../assets/css/main.css`, `../../assets/js/...`) are
   unchanged.
+- No `{{` placeholder text remains anywhere in the file.
+- The category description is 160 characters or fewer.
 
 Report the static check results, then use the question tool to ask the user to
 open the page in a browser and confirm the title, description, and project cards
@@ -108,7 +118,9 @@ and fix it.
   to the `project-documenter` agent.
 - Do not edit `assets/templates/category-pages.html`.
 - Do not modify category pages other than the one being built.
-- Do not hardcode title/description into the page HTML.
+- Do not hardcode title/description into the page body — visible content comes
+  from projects.json at runtime. The `<head>` SEO tags are the sole exception:
+  they must be hardcoded because crawlers don't run JavaScript.
 - Do not change `homepage`/`homepageOrder` fields — they belong to project
   entries, which are off-limits.
 - No shell commands are available; never attempt to start servers or use curl.
