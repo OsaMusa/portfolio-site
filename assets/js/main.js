@@ -10,7 +10,6 @@
 		$body = $('body'),
 		$wrapper = $('#wrapper'),
 		$header = $('#header'),
-		$nav = $('#nav'),
 		$main = $('#main'),
 		$navPanelToggle, $navPanel, $navPanelInner;
 
@@ -166,7 +165,11 @@
 				$navPanelInner = $navPanel.children('nav');
 
 		// Move nav content on breakpoint change.
+		// Note: #nav is injected asynchronously by components.js, so it must be
+		// queried live inside each handler instead of cached at init.
 			breakpoints.on('>medium', function() {
+
+				var $nav = $('#nav');
 
 				// NavPanel -> Nav.
 					$navPanelInner.children().appendTo($nav);
@@ -178,6 +181,8 @@
 			});
 
 			breakpoints.on('<=medium', function() {
+
+				var $nav = $('#nav');
 
 				// Nav -> NavPanel.
 					$nav.children().appendTo($navPanelInner);
