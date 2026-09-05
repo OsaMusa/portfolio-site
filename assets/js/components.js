@@ -1,13 +1,30 @@
+// Site root resolved relative to this script's own URL (assets/js/components.js).
+// Works at any page depth, locally and on GitHub Pages subpaths.
+const SITE_ROOT = document.currentScript
+    ? new URL('../..', document.currentScript.src).pathname
+    : '/';
+
+// Rewrite root-absolute href/src paths in a container to include the site root
+function fixPaths(container) {
+    container.querySelectorAll('a[href^="/"]').forEach(link => {
+        link.setAttribute('href', SITE_ROOT + link.getAttribute('href').slice(1));
+    });
+    container.querySelectorAll('img[src^="/"]').forEach(img => {
+        img.setAttribute('src', SITE_ROOT + img.getAttribute('src').slice(1));
+    });
+}
+
 // Load HTML component into placeholder
 async function loadComponent(id, url) {
     const target = document.getElementById(id);
     if (!target) return;
 
     try {
-        const response = await fetch(url);
+        const response = await fetch(SITE_ROOT + url);
         if (!response.ok) throw new Error(`Failed to load ${url}`);
         const html = await response.text();
         target.innerHTML = html;
+        fixPaths(target);
         
         // If loading nav, set active state
         if (id === 'nav-placeholder') {
@@ -41,13 +58,13 @@ async function populateNavDropdown() {
     if (!dropdown) return;
 
     try {
-        const response = await fetch('/assets/data/projects.json');
+        const response = await fetch(SITE_ROOT + 'assets/data/projects.json');
         if (!response.ok) throw new Error('Failed to load projects data');
         const data = await response.json();
 
         dropdown.innerHTML = Object.entries(data.categories)
             .map(([key, category]) =>
-                `<li><a href="/projects/${key}/">${category.title}</a></li>`
+                `<li><a href="${SITE_ROOT}projects/${key}/">${category.title}</a></li>`
             )
             .join('');
     } catch (error) {
@@ -83,8 +100,8 @@ function setActiveNavLink() {
             bestMatchLength = normalizedHref.length;
         }
         // Partial match: current path starts with href (for nested project pages)
-        // Skip root "/" to avoid matching every page; only allow partial match for paths with 2+ segments
-        else if (normalizedHref !== '/' && normalizedCurrent.startsWith(normalizedHref) && normalizedHref.length > bestMatchLength) {
+        // Skip the site root to avoid matching every page; only allow partial match for deeper paths
+        else if (normalizedHref !== '/' && normalizedHref !== SITE_ROOT && normalizedCurrent.startsWith(normalizedHref) && normalizedHref.length > bestMatchLength) {
             if (bestMatch) bestMatch.parentElement.classList.remove('active');
             link.parentElement.classList.add('active');
             bestMatch = link;
@@ -153,7 +170,7 @@ async function loadHomepageProjects() {
     if (!featuredContainer && !postsContainer) return;
 
     try {
-        const response = await fetch('/assets/data/projects.json');
+        const response = await fetch(SITE_ROOT + 'assets/data/projects.json');
         if (!response.ok) throw new Error('Failed to load projects data');
         const data = await response.json();
 
@@ -227,7 +244,7 @@ async function loadCategoryProjects() {
     const categorySlug = pathParts[projectsIndex + 1];
 
     try {
-        const response = await fetch('/assets/data/projects.json');
+        const response = await fetch(SITE_ROOT + 'assets/data/projects.json');
         if (!response.ok) throw new Error('Failed to load projects data');
         const data = await response.json();
 
@@ -266,7 +283,7 @@ async function loadCategoriesOverview() {
     if (!container) return;
 
     try {
-        const response = await fetch('/assets/data/projects.json');
+        const response = await fetch(SITE_ROOT + 'assets/data/projects.json');
         if (!response.ok) throw new Error('Failed to load projects data');
         const data = await response.json();
 
@@ -289,10 +306,13 @@ async function loadCategoriesOverview() {
 
 // Initialize components when DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
-    loadComponent('header-placeholder', '/assets/html/header.html');
-    loadComponent('nav-placeholder', '/assets/html/nav.html');
-    loadComponent('prj-btns-placeholder', '/assets/html/project-buttons.html');
-    loadComponent('footer-placeholder', '/assets/html/footer.html');
+    // Fix root-absolute links in static page content (e.g. 404.html)
+    fixPaths(document);
+
+    loadComponent('header-placeholder', 'assets/html/header.html');
+    loadComponent('nav-placeholder', 'assets/html/nav.html');
+    loadComponent('prj-btns-placeholder', 'assets/html/project-buttons.html');
+    loadComponent('footer-placeholder', 'assets/html/footer.html');
     loadCategoryProjects();
     loadHomepageProjects();
     loadCategoriesOverview();
