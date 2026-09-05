@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Appeal Form Automations - Osa Musa</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="Case study: Automation processing 300+ appeal forms in under 3 minutes, replacing a 3-day manual effort by a team of four. Built with Power Query and VBA." />
+		<meta property="og:title" content="Appeal Form Automations - Osa Musa" />
+		<meta property="og:description" content="Case study: Automation processing 300+ appeal forms in under 3 minutes, replacing a 3-day manual effort by a team of four. Built with Power Query and VBA." />
+		<meta property="og:type" content="article" />
+		<meta property="og:url" content="https://osamusa.github.io/portfolio-site/projects/automation/appeal-form-automations/" />
+		<meta property="og:image" content="https://osamusa.github.io/portfolio-site/assets/images/share-image.jpg" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="Appeal Form Automations - Osa Musa" />
+		<meta name="twitter:description" content="Case study: Automation processing 300+ appeal forms in under 3 minutes, replacing a 3-day manual effort by a team of four. Built with Power Query and VBA." />
+		<meta name="twitter:image" content="https://osamusa.github.io/portfolio-site/assets/images/share-image.jpg" />
+		<link rel="stylesheet" href="../../../assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="../../../assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+		<div id="wrapper">
+
+			<!-- Header -->
+			<div id="header-placeholder"></div>
+
+			<!-- Nav -->
+			<div id="nav-placeholder"></div>
+
+			<!-- Main -->
+			<div id="main">
+
+				<!-- Post -->
+				<section class="post">
+					<header class="major">
+						<h1>Appeal Form Automations</h1>
+						<p style="text-align: center; font-size: x-large;"><b>Project for: </b>Altus Group</p>
+					</header>
+					<h2>Problem</h2>
+				<p>There were a large number of properties to be appealed and the company had to notify the assessor that they were going to be representing the client in the hearing. Despite how the notification forms for this process were in a standard format, that standard was different for each assessor and appeal type.</p>
+				
+				<p>Filling out these forms was a time-consuming process and only became worse each year, as new business came in. The VP of Operations brought this project to me because an employee had shared concerns about the amount of appeal forms that needed to be completed for that jurisdiction that year. The consultant team needed a way to quickly fill out the forms for each of their properties with minimal human error.</p>
+					
+					<h2>Solution</h2>
+					<p>I utilized Power Query in Excel to extract, transform, and load the data from the company's database to create a CSV to be used with the Evermap AutoMailMerge™ software. The Evermap software was used to fill out the PDF form and create a completed form for each listed property.</p>
+					
+					<p>Then a Visual Basic macro was run to combine the resulting PDF with its associated supporting files. This was made to be handled by the use of a Windows batch (.bat) file to allow for non-technical employees to accomplish the task with the ease of clicking the file.</p>
+					
+					<h2>Challenges</h2>
+					<p><strong>PDF Form Limitations</strong>: I had to use Evermap AutoMailMerge™ because there is no way to accomplish a MailMerge on PDF files via VBA. This required integrating third-party software into the automation workflow.</p>
+					
+					<p><strong>Secure Execution</strong>: I had to create the batch script in order for this to be used by the consultant and only allow for them to run the automation without accidentally causing an issue with any of the files being stored on the AWS server. The batch file provided a controlled execution environment that prevented users from modifying or deleting critical files.</p>
+					
+					<h2>Result</h2>
+					<p>The original task took the consultant and her team of 3 people 3 days (with overtime) to complete each year in the past. This was with about half the amount of appeals that would be done the year I was asked to create an automation.</p>
+					
+					<p>Even with the doubled workload (over 300 forms), the result was that the entire project was completed in under 3 minutes by one person who only had to run the .bat file. The process is now able to be done by one team member, and with its simplicity, the team was able to more easily transfer the process to new team members.</p>
+					
+					<h2>Technologies Used</h2>
+					<ul>
+						<li>Excel</li>
+						<li>Power Query</li>
+						<li>Evermap AutoMailMerge™</li>
+						<li>VBA (Visual Basic for Applications)</li>
+						<li>Windows Batch Scripting</li>
+						<li>AWS (file storage)</li>
+					</ul>
+
+					<!-- Project Buttons -->
+					<div id="prj-btns-placeholder"></div>
+				</section>
+			</div>
+
+			<!-- Footer -->
+			<div id="footer-placeholder"></div>
+		</div>
+
+		<!-- Scripts -->
+		<script src="../../../assets/js/jquery.min.js"></script>
+		<script src="../../../assets/js/jquery.scrollex.min.js"></script>
+		<script src="../../../assets/js/jquery.scrolly.min.js"></script>
+		<script src="../../../assets/js/browser.min.js"></script>
+		<script src="../../../assets/js/breakpoints.min.js"></script>
+		<script src="../../../assets/js/util.js"></script>
+		<script src="../../../assets/js/main.js"></script>
+		<script src="../../../assets/js/components.js"></script>
+	</body>
+</html>

@@ -165,30 +165,28 @@
 			// Get inner.
 				$navPanelInner = $navPanel.children('nav');
 
-			// Move nav content on breakpoint change.
-				var $navContent = $nav.children();
+		// Move nav content on breakpoint change.
+			breakpoints.on('>medium', function() {
 
-				breakpoints.on('>medium', function() {
+				// NavPanel -> Nav.
+					$navPanelInner.children().appendTo($nav);
 
-					// NavPanel -> Nav.
-						$navContent.appendTo($nav);
+				// Flip icon classes.
+					$nav.find('.icons, .icon')
+						.removeClass('alt');
 
-					// Flip icon classes.
-						$nav.find('.icons, .icon')
-							.removeClass('alt');
+			});
 
-				});
+			breakpoints.on('<=medium', function() {
 
-				breakpoints.on('<=medium', function() {
+				// Nav -> NavPanel.
+					$nav.children().appendTo($navPanelInner);
 
-					// Nav -> NavPanel.
-						$navContent.appendTo($navPanelInner);
+				// Flip icon classes.
+					$navPanelInner.find('.icons, .icon')
+						.addClass('alt');
 
-					// Flip icon classes.
-						$navPanelInner.find('.icons, .icon')
-							.addClass('alt');
-
-				});
+			});
 
 			// Hack: Disable transitions on WP.
 				if (browser.os == 'wp'
@@ -256,3 +254,73 @@
 		}
 
 })(jQuery);
+
+// Dark mode theme toggle.
+(function() {
+
+	var root = document.documentElement;
+
+	// Apply saved theme preference.
+		var savedTheme = null;
+
+		try {
+			savedTheme = localStorage.getItem('theme');
+		} catch (e) {}
+
+		if (savedTheme === 'dark' || savedTheme === 'light')
+			root.setAttribute('data-theme', savedTheme);
+
+	// Determine the effective theme (explicit attribute or system preference).
+		function effectiveTheme() {
+
+			var explicit = root.getAttribute('data-theme');
+
+			if (explicit)
+				return explicit;
+
+			return (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+
+		}
+
+	// Sync the toggle icon/label with the effective theme.
+		window.syncThemeToggle = function() {
+
+			var toggle = document.getElementById('theme-toggle');
+
+			if (!toggle)
+				return;
+
+			var dark = (effectiveTheme() === 'dark');
+
+			toggle.classList.toggle('fa-sun', dark);
+			toggle.classList.toggle('fa-moon', !dark);
+			toggle.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+
+		};
+
+	// Toggle handler (delegated, since the nav is injected asynchronously).
+	// Capture phase: the mobile nav panel stops propagation of clicks inside it.
+		document.addEventListener('click', function(event) {
+
+			var toggle = (event.target.closest ? event.target.closest('#theme-toggle') : null);
+
+			if (!toggle)
+				return;
+
+			event.preventDefault();
+
+			var next = (effectiveTheme() === 'dark') ? 'light' : 'dark';
+
+			root.setAttribute('data-theme', next);
+
+			try {
+				localStorage.setItem('theme', next);
+			} catch (e) {}
+
+			window.syncThemeToggle();
+
+		}, true);
+
+	window.syncThemeToggle();
+
+})();

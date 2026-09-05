@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Report Generator - Osa Musa</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="Case study: VBA macro that cut evidence report generation from 1.5 hours to 45 seconds by automating data transfer from Excel to Word." />
+		<meta property="og:title" content="Report Generator - Osa Musa" />
+		<meta property="og:description" content="Case study: VBA macro that cut evidence report generation from 1.5 hours to 45 seconds by automating data transfer from Excel to Word." />
+		<meta property="og:type" content="article" />
+		<meta property="og:url" content="https://osamusa.github.io/portfolio-site/projects/automation/report-generator/" />
+		<meta property="og:image" content="https://osamusa.github.io/portfolio-site/assets/images/share-image.jpg" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="Report Generator - Osa Musa" />
+		<meta name="twitter:description" content="Case study: VBA macro that cut evidence report generation from 1.5 hours to 45 seconds by automating data transfer from Excel to Word." />
+		<meta name="twitter:image" content="https://osamusa.github.io/portfolio-site/assets/images/share-image.jpg" />
+		<link rel="stylesheet" href="../../../assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="../../../assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+		<div id="wrapper">
+
+			<!-- Header -->
+			<div id="header-placeholder"></div>
+
+			<!-- Nav -->
+			<div id="nav-placeholder"></div>
+
+			<!-- Main -->
+			<div id="main">
+
+				<!-- Post -->
+				<section class="post">
+					<header class="major">
+						<h1>Report Generator</h1>
+						<p style="text-align: center; font-size: x-large;"><b>Project for: </b>Altus Group</p>
+					</header>
+					<h2>Problem</h2>
+					<p>When appealing the values of parcels, consultants needed to provide their evidence in a format that explained their points. This was done in the form of a narrative that included the counter values and the methodologies behind how they came to them.</p>
+					
+					<p>The process of creating these narratives was made more repeatable by having the calculations done in Excel workbooks that would have the results in a format that was ready to be copied and pasted into a Word document. Then, the consultant would make the necessary edits based on the factors they felt applied to the case.</p>
+					
+					<p>The resulting evidence report could be created by an experienced consultant in about 1.5 hours. With the company growing, this was unsustainable and difficult to train new consultants on. The company needed a way to reduce the time taken to create these evidence reports that was simple enough for new hires to quickly complete.</p>
+					
+					<h2>Solution</h2>
+					<p>Since the narratives were created using Microsoft Office applications, I developed a VBA macro to automate the report generation process.</p>
+					
+					<p>The macro was embedded in Excel workbooks that contained a checklist of narrative sections consultants could select for inclusion. Before distribution, I integrated the macro into each Excel file so consultants had the automation readily available.</p>
+					
+					<p>When a consultant ran the macro, it would open a Word document template and populate the narrative by searching for placeholder tags and replacing them with the corresponding data from the Excel workbook. The macro handled not just text, but also charts, images, tables, and other visual elements, maintaining proper formatting throughout.</p>
+					
+					<p>Additionally, the macro could generate a PDF version of the completed evidence report and automatically combine it with any supporting documentation files.</p>
+					
+					<h2>Challenges</h2>
+					<p><strong>Late Binding and Cross-Application Integration</strong>: I had to learn how to use Late Binding so that consultants could use the macro without needing to change advanced Excel settings. This also allowed me to fully control Word's formatting capabilities through VBA and use Adobe's PDF generation and file combining features, all without requiring any configuration changes from the consultants.</p>
+					
+					<p><strong>Template System from Scratch</strong>: I had to use tags in order for this to function like a normal template, which meant I had to create the functions from scratch. I ultimately went with a find/replace methodology and even built my own library around this project for future use and updates.</p>
+					
+					<p><strong>Image Handling and Standards</strong>: I found that naming the images in Excel allowed for consistency, as they could then be selected and copied reliably. Thus, a standard was adopted in which the only images that consultants had on the spreadsheet were ones that could be automatically generated by one of the macros. For tables, charts, and other content that needed to be pasted as images, that was handled through a paste setting in VBA directly.</p>
+					
+					<p><strong>Workbook Protection</strong>: To prevent consultants from accidentally breaking the automation, I locked every cell that wasn't meant to be edited using Excel's protect worksheet feature. I implemented a color-coded system where red indicated cells that were allowed to be edited, and black indicated calculated or standard cells. The protect workbook feature was also used to prevent the creation or deletion of any sheets.</p>
+					
+					<h2>Result</h2>
+					<p>The consultants became able to create evidence reports by simply deciding what parts of their Excel-based calculations they wanted to include, and then clicking the button to run the macro.</p>
+					
+					<p>With this macro, the time needed to complete the process of transferring Excel calculations into an evidence report was dropped from 1.5 hours to 45 seconds. Furthermore, they were then able to more easily train novice consultants to create competent narratives in preparation for appeal hearings.</p>
+					
+					<h2>Technologies Used</h2>
+					<ul>
+						<li>Excel</li>
+						<li>Word</li>
+						<li>Adobe Acrobat</li>
+						<li>VBA (Visual Basic for Applications)</li>
+					</ul>
+					
+					<!-- Project Buttons -->
+					<div id="prj-btns-placeholder"></div>
+				</section>
+			</div>
+
+			<!-- Footer -->
+			<div id="footer-placeholder"></div>
+		</div>
+
+		<!-- Scripts -->
+		<script src="../../../assets/js/jquery.min.js"></script>
+		<script src="../../../assets/js/jquery.scrollex.min.js"></script>
+		<script src="../../../assets/js/jquery.scrolly.min.js"></script>
+		<script src="../../../assets/js/browser.min.js"></script>
+		<script src="../../../assets/js/breakpoints.min.js"></script>
+		<script src="../../../assets/js/util.js"></script>
+		<script src="../../../assets/js/main.js"></script>
+		<script src="../../../assets/js/components.js"></script>
+	</body>
+</html>

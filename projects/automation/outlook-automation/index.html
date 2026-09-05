@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Outlook Automation - Osa Musa</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="Case study: Alteryx and VBA automation that updates hearing calendars for all US consultants in under 3 minutes, replacing 20+ hours of manual work weekly." />
+		<meta property="og:title" content="Outlook Automation - Osa Musa" />
+		<meta property="og:description" content="Case study: Alteryx and VBA automation that updates hearing calendars for all US consultants in under 3 minutes, replacing 20+ hours of manual work weekly." />
+		<meta property="og:type" content="article" />
+		<meta property="og:url" content="https://osamusa.github.io/portfolio-site/projects/automation/outlook-automation/" />
+		<meta property="og:image" content="https://osamusa.github.io/portfolio-site/assets/images/share-image.jpg" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="Outlook Automation - Osa Musa" />
+		<meta name="twitter:description" content="Case study: Alteryx and VBA automation that updates hearing calendars for all US consultants in under 3 minutes, replacing 20+ hours of manual work weekly." />
+		<meta name="twitter:image" content="https://osamusa.github.io/portfolio-site/assets/images/share-image.jpg" />
+		<link rel="stylesheet" href="../../../assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="../../../assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+		<div id="wrapper">
+
+			<!-- Header -->
+			<div id="header-placeholder"></div>
+
+			<!-- Nav -->
+			<div id="nav-placeholder"></div>
+
+			<!-- Main -->
+			<div id="main">
+
+				<!-- Post -->
+				<section class="post">
+					<header class="major">
+						<h1>Outlook Automation</h1>
+						<p style="text-align: center; font-size: x-large;"><b>Project for: </b>Altus Group</p>
+					</header>
+					<h2>Problem</h2>
+					<p>The company had its scheduled hearings stored on both a legacy database and Snowflake. To know which consultant should attend each hearing, as well as where and when, they would export the data from the database and have an assistant from the operations team manually enter the information into each consultant's Outlook calendar.</p>
+					
+					<p>This process cost these employees several hours each day and was prone to input errors. Operations needed a way to reduce the workload for the assistants while also reducing the errors that could risk hearings being missed. The solution also needed to provide management with a way to see and make updates to the calendar from a shared location.</p>
+					
+					<h2>Solution</h2>
+					<p>I identified this issue and proposed creating a solution to it. I utilized Alteryx to extract and transform hearing data from the company's Snowflake database, then load it into a CSV file.</p>
+					
+					<p>To automate the process of adding the hearings to Outlook, I developed a Visual Basic macro. The macro would read the data from the CSV exported from Alteryx using Power Query, and use that information to generate a meeting invite in Outlook for each record of hearing data.</p>
+					
+					<p>The macro sent the meeting invites from an Outlook account created specifically for the operations team to oversee the hearing calendar. It also recorded the global appointment ID that Outlook assigned to the meetings and used them for tracking changes in the schedules.</p>
+					
+					<p>The automation was designed to be cyclical. Alteryx would use the Excel file to compare the hearings to see if they had Outlook IDs, and make any necessary changes.</p>
+					
+					<h2>Challenges</h2>
+					<p><strong>Appointment Tracking</strong>: I realized that without recording the global appointment IDs, there would be no way to find an existing appointment and make any necessary updates that existed in the schedule. When meetings were rescheduled, there would be a duplicate appointment at the new time otherwise. This led me to implement the ID tracking system to enable proper updates.</p>
+					
+					<p><strong>Dedicated Outlook Account</strong>: There needed to be a new Outlook account with its own email address that the operations team needed to access in order for this to work the way it did. The reason was that this was creating and sending actual Outlook meeting invites like how the assistants did. This also meant I didn't need to worry about API delays due to it being automatically handled on a computer.</p>
+					
+					<p><strong>Integration with Existing Workflows</strong>: Having it done as described above is also why Alteryx was used. It allowed for a single employee who was already doing a daily refresh task to simply run the automation in the morning to update the schedules for all US consultants in under 3 minutes and go on with the rest of their tasks for the day.</p>
+					
+					<h2>Result</h2>
+					<p>The consultants were able to more easily get a clear picture of when they had hearings and better avoid missing them. The operations team was no longer spending time entering hearings into the consultants' personal calendars and could focus on other tasks.</p>
+					
+					<p>The VP of Operations and several of the local assistants informed me that the automation ultimately eliminated that task for the department and allowed for them to focus on more important items. The assistants would spend at least 20 hours per week each on just preparing consultant schedules with hearings. The automation replaced that entire process with a single employee updating the schedules for all US consultants in under 3 minutes.</p>
+					
+					<p>They and management were given access to the calendar of the account sending the meeting invites, allowing them to have complete oversight of the hearings and be able to see when changes should be made.</p>
+					
+					<h2>Technologies Used</h2>
+					<ul>
+						<li>Alteryx</li>
+						<li>Snowflake</li>
+						<li>Excel</li>
+						<li>Power Query</li>
+						<li>VBA (Visual Basic for Applications)</li>
+						<li>Outlook</li>
+					</ul>
+					
+					<!-- Project Buttons -->
+					<div id="prj-btns-placeholder"></div>
+				</section>
+			</div>
+
+			<!-- Footer -->
+			<div id="footer-placeholder"></div>
+		</div>
+
+		<!-- Scripts -->
+		<script src="../../../assets/js/jquery.min.js"></script>
+		<script src="../../../assets/js/jquery.scrollex.min.js"></script>
+		<script src="../../../assets/js/jquery.scrolly.min.js"></script>
+		<script src="../../../assets/js/browser.min.js"></script>
+		<script src="../../../assets/js/breakpoints.min.js"></script>
+		<script src="../../../assets/js/util.js"></script>
+		<script src="../../../assets/js/main.js"></script>
+		<script src="../../../assets/js/components.js"></script>
+	</body>
+</html>
