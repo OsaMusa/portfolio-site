@@ -986,7 +986,9 @@ themeToggle?.addEventListener('click', function() {
 
 ---
 
-### 20. Create Custom 404 Page
+### 20. Create Custom 404 Page ✅ COMPLETE
+
+**Status**: Created `/404.html` using the site's current component conventions: `#header-placeholder`, `#nav-placeholder`, and `#footer-placeholder` loaded via `components.js` (instead of the hardcoded nav in the original template), full SEO/OG/Twitter meta tags matching other pages, and helpful links to Home, All Projects, and About. Verified that Cloudflare Pages also serves `404.html` automatically (walking up the directory tree for the nearest match), so no changes will be needed at task 21 migration.
 
 **File**: `/404.html`
 
@@ -1152,7 +1154,7 @@ GitHub Pages automatically serves `404.html` for missing pages. Create a helpful
 | 17. Mobile Responsiveness | ✅ Complete | Tested across breakpoints. Fixed: mobile sidebar nav not populating (timing issue in main.js), resume download link broken on non-homepage pages (changed to absolute path), menu button invisible on light backgrounds (added mix-blend-mode: difference) |
 | 18. Dark Mode Toggle | ✅ Complete | Toggle added to nav icons via nav.html component. CSS custom properties defined in :root with prefers-color-scheme and data-theme="dark" overrides. Visible surfaces converted to var() (body text, links, headings, code, hr, box, buttons, forms, tables, pagination, #main, posts borders, footer, #navPanel, dropdown). 0.25s transitions on body/headings/#main/cards/footer/navPanel/dropdown/box. Toggle JS in main.js uses capture-phase delegation (required because the nav panel stops propagation of inner clicks). syncThemeToggle() called from components.js after nav injection. Verified across desktop/mobile, light/dark, persistence, and system preference. |
 | 19. SEO Meta Tags | ✅ Complete | SEO infrastructure implemented: templates updated with placeholders ({{Project Name}}, {{Project Description}}, etc.), agents updated to handle placeholder substitution during page creation, components.js modified to remove runtime title setting. **Note**: Existing pages still need actual SEO content added (meta descriptions, OG tags, Twitter Cards) when creating new case studies or updating existing ones. Canonical URLs and JSON-LD dropped (low value for portfolio site). |
-| 20. Custom 404 Page | ❌ Not Started | Create helpful error page at `/404.html` |
+| 20. Custom 404 Page | ✅ Complete | Created `/404.html` with component placeholders, SEO tags, and helpful links. Works on both GitHub Pages and Cloudflare Pages. |
 | 21. Cloudflare Pages Migration | ❌ Not Started | Defer until improvement list complete — switch from GitHub Pages to enable private repo |
 
-**Core structural migration is ~80% complete.** The site has the correct directory structure, migrated case studies, updated homepage links, fully functional dropdown navigation with category-based organization, and a projects overview page that dynamically renders all categories. Portfolio trimmed from 9 to 6 projects after assessment. All case studies complete. Dark mode toggle implemented. SEO meta tags added. Remaining: custom 404 page and Cloudflare Pages migration (deferred until all improvements are complete).
+**Core structural migration is ~80% complete.** The site has the correct directory structure, migrated case studies, updated homepage links, fully functional dropdown navigation with category-based organization, and a projects overview page that dynamically renders all categories. Portfolio trimmed from 9 to 6 projects after assessment. All case studies complete. Dark mode toggle implemented. SEO meta tags added. Custom 404 page created. Remaining: Cloudflare Pages migration (deferred until all improvements are complete).
